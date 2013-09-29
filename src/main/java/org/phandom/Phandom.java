@@ -31,7 +31,7 @@ package org.phandom;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
-import com.jcabi.log.VerboseProcess;
+import com.jcabi.log.Logger;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -86,8 +86,9 @@ public final class Phandom {
     /**
      * Get DOM.
      * @return DOM
+     * @throws IOException If fails
      */
-    public Document dom() {
+    public Document dom() throws IOException {
         final File script = Phandom.temp(
             this.getClass().getResourceAsStream("dom.js"),
             ".js"
@@ -96,33 +97,50 @@ public final class Phandom {
             new ByteArrayInputStream(this.page.getBytes(Charsets.UTF_8)),
             ".html"
         );
-        return Phandom.parse(
-            new VerboseProcess(
-                new ProcessBuilder(
-                    "phantomjs",
-                    script.getAbsolutePath(),
-                    src.getAbsolutePath()
-                )
-            ).stdout()
+        final Process proc = new ProcessBuilder(
+            "phantomjs", script.getAbsolutePath(), src.getAbsolutePath()
+        ).start();
+        proc.getOutputStream().close();
+        final int code;
+        try {
+            code = proc.waitFor();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new IOException(ex);
+        }
+        final String stderr = IOUtils.toString(
+            proc.getErrorStream(), Charsets.UTF_8
         );
+        if (code != 0) {
+            throw new IOException(
+                String.format(
+                    "phantomjs failed with exit code #%d: %s", code, stderr
+                )
+            );
+        }
+        final String stdout = IOUtils.toString(
+            proc.getInputStream(), Charsets.UTF_8
+        );
+        Logger.debug(this, "STDERR:\n%s", stderr);
+        Logger.debug(this, "DOM:\n%s", stdout);
+        return Phandom.parse(stdout);
     }
 
     /**
      * Parse XML into DOM.
      * @param xml XML to parse
      * @return DOM
+     * @throws IOException If fails
      */
-    public static Document parse(final String xml) {
+    private static Document parse(final String xml) throws IOException {
         try {
             return DocumentBuilderFactory.newInstance()
                 .newDocumentBuilder()
                 .parse(IOUtils.toInputStream(xml, CharEncoding.UTF_8));
         } catch (ParserConfigurationException ex) {
-            throw new IllegalStateException(ex);
-        } catch (IOException ex) {
-            throw new IllegalStateException(ex);
+            throw new IOException(ex);
         } catch (SAXException ex) {
-            throw new IllegalStateException(ex);
+            throw new IOException(ex);
         }
     }
 
@@ -131,15 +149,13 @@ public final class Phandom {
      * @param content Content to save there
      * @param ext Extension
      * @return File name
+     * @throws IOException If fails
      */
-    private static File temp(final InputStream content, final String ext) {
-        try {
-            final File file = File.createTempFile("phandom-", ext);
-            IOUtils.copy(content, new FileOutputStream(file));
-            return file;
-        } catch (IOException ex) {
-            throw new IllegalStateException(ex);
-        }
+    private static File temp(final InputStream content, final String ext)
+        throws IOException {
+        final File file = File.createTempFile("phandom-", ext);
+        IOUtils.copy(content, new FileOutputStream(file));
+        return file;
     }
 
 }

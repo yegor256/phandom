@@ -35,11 +35,13 @@ if (system.args.length === 1) {
     console.log('Usage: dom.js <file-path>');
     phantom.exit();
 }
-function log(msg) {
-    console.log('console: ' + msg);
+var start = Date.now();
+function stderr(msg) {
+    var msec = Date.now() - start;
+    system.stderr.writeLine(msec / 1000 + ':' + (msec % 1000) + ' ' + msg);
 }
 page.onConsoleMessage = function (msg) {
-    log(msg);
+    stderr(msg);
 };
 page.onError = function(msg, trace) {
     var msgStack = ['ERROR: ' + msg];
@@ -51,36 +53,38 @@ page.onError = function(msg, trace) {
             }
         );
     }
-    log(msgStack.join('\n'));
+    stderr(msgStack.join('\n'));
 };
 page.onAlert = function(msg) {
-    log('ALERT: ' + msg);
+    stderr('ALERT: ' + msg);
 };
 page.onResourceError = function(resourceError) {
-    log('Unable to load resource (#' + resourceError.id + 'URL:' + resourceError.url + ')');
-    log('Error code: ' + resourceError.errorCode + '. Description: ' + resourceError.errorString);
+    stderr('Unable to load resource (#' + resourceError.id + 'URL:' + resourceError.url + ')');
+    stderr('Error code: ' + resourceError.errorCode + '. Description: ' + resourceError.errorString);
 };
 page.onResourceRequested = function(requestData, networkRequest) {
-    log('Request (#' + requestData.id + '): ' + JSON.stringify(requestData));
+    stderr('Request (#' + requestData.id + '): ' + JSON.stringify(requestData));
 };
 page.onLoadStarted = function() {
-    var current = page.evaluate(function() {
-        return window.location.href;
-    });
-    log('Current page ' + current +' will disappear...');
-    log('Now loading a new page...');
+    var current = page.evaluate(
+        function() {
+            return window.location.href;
+        }
+    );
+    stderr('Current page ' + current +' will disappear...');
+    stderr('Now loading a new page...');
 };
 page.onLoadFinished = function(status) {
-    log('Status: ' + status);
+    stderr('Status: ' + status);
 };
-log('URL to render: ' + system.args[1]);
+stderr('URL to render: ' + system.args[1]);
 page.open(
     system.args[1],
     function (status) {
         if (status === 'success') {
             console.log(page.content);
         } else {
-            log(status);
+            stderr(status);
         }
         phantom.exit();
     }

@@ -47,10 +47,12 @@ public final class PhandomTest {
     @Test
     public void buildsDomDocument() throws Exception {
         MatcherAssert.assertThat(
-            new Phandom("<html><body><p>Hey!</p></body></html>").dom(),
+            XhtmlMatchers.xhtml(
+                new Phandom("<html><body><p>Hey!</p></body></html>").dom()
+            ),
             XhtmlMatchers.hasXPaths(
-                "/xhtml:html/xhtml:body",
-                "//xhtml:p[.='Hey!']"
+                "/html/body",
+                "//p[.='Hey!']"
             )
         );
     }
