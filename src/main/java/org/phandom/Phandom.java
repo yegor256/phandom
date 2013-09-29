@@ -31,6 +31,7 @@ package org.phandom;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
+import javax.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.w3c.dom.Document;
@@ -57,7 +58,7 @@ public final class Phandom {
      * Public ctor.
      * @param content Content to encapsulate
      */
-    public Phandom(final String content) {
+    public Phandom(@NotNull final String content) {
         this.page = content;
     }
 
