@@ -31,13 +31,25 @@ package org.phandom;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
+import com.jcabi.log.VerboseProcess;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.validation.constraints.NotNull;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
- * Phandom.
+ * PhantomJS DOM.
  *
  * @author Yegor Bugayenko (yegor@tpc2.com)
  * @version $Id$
@@ -63,11 +75,71 @@ public final class Phandom {
     }
 
     /**
+     * Public ctor.
+     * @param stream Stream with content
+     * @throws IOException If fails to read the stream
+     */
+    public Phandom(@NotNull final InputStream stream) throws IOException {
+        this(IOUtils.toString(stream, CharEncoding.UTF_8));
+    }
+
+    /**
      * Get DOM.
      * @return DOM
      */
     public Document dom() {
-        return null;
+        final File script = Phandom.temp(
+            this.getClass().getResourceAsStream("dom.js"),
+            ".js"
+        );
+        final File src = Phandom.temp(
+            new ByteArrayInputStream(this.page.getBytes(Charsets.UTF_8)),
+            ".html"
+        );
+        return Phandom.parse(
+            new VerboseProcess(
+                new ProcessBuilder(
+                    "phantomjs",
+                    script.getAbsolutePath(),
+                    src.getAbsolutePath()
+                )
+            ).stdout()
+        );
+    }
+
+    /**
+     * Parse XML into DOM.
+     * @param xml XML to parse
+     * @return DOM
+     */
+    public static Document parse(final String xml) {
+        try {
+            return DocumentBuilderFactory.newInstance()
+                .newDocumentBuilder()
+                .parse(IOUtils.toInputStream(xml, CharEncoding.UTF_8));
+        } catch (ParserConfigurationException ex) {
+            throw new IllegalStateException(ex);
+        } catch (IOException ex) {
+            throw new IllegalStateException(ex);
+        } catch (SAXException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    /**
+     * Make temporary file.
+     * @param content Content to save there
+     * @param ext Extension
+     * @return File name
+     */
+    private static File temp(final InputStream content, final String ext) {
+        try {
+            final File file = File.createTempFile("phandom-", ext);
+            IOUtils.copy(content, new FileOutputStream(file));
+            return file;
+        } catch (IOException ex) {
+            throw new IllegalStateException(ex);
+        }
     }
 
 }
