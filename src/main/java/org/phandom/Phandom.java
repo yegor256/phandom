@@ -62,7 +62,7 @@ import org.xml.sax.SAXException;
 public final class Phandom {
 
     /**
-     * Content of the page to render
+     * Content of the page to render.
      */
     private final transient String page;
 
