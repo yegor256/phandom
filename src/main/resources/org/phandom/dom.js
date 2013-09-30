@@ -38,7 +38,7 @@ if (system.args.length === 1) {
 var start = Date.now();
 function stderr(msg) {
     var msec = Date.now() - start;
-    system.stderr.writeLine(msec / 1000 + ':' + (msec % 1000) + ' ' + msg);
+    system.stderr.writeLine((msec / 1000).toFixed(3) + ': ' + msg);
 }
 page.onConsoleMessage = function (msg) {
     stderr(msg);

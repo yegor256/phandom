@@ -138,9 +138,9 @@ public final class Phandom {
                 .newDocumentBuilder()
                 .parse(IOUtils.toInputStream(xml, CharEncoding.UTF_8));
         } catch (ParserConfigurationException ex) {
-            throw new IOException(ex);
+            throw new IOException(xml, ex);
         } catch (SAXException ex) {
-            throw new IOException(ex);
+            throw new IOException(xml, ex);
         }
     }
 
