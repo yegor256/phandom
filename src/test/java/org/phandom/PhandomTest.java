@@ -31,6 +31,7 @@ package org.phandom;
 
 import com.rexsl.test.XhtmlMatchers;
 import java.io.IOException;
+import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
@@ -49,10 +50,17 @@ public final class PhandomTest {
     public void buildsDomDocument() throws Exception {
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
-                new Phandom("<html><body><p>Hey!</p></body></html>").dom()
+                new Phandom(
+                    StringUtils.join(
+                        "<html><head>",
+                        "<meta content='hi there' name='description'>",
+                        "</head><body><p>Hey!</p></body></html>"
+                    )
+                ).dom()
             ),
             XhtmlMatchers.hasXPaths(
                 "/html/body",
+                "/html/head/meta[name='description']",
                 "//p[.='Hey!']"
             )
         );
