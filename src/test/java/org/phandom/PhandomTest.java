@@ -57,4 +57,24 @@ public final class PhandomTest {
         );
     }
 
+    /**
+     * Phandom can fail on a broken DOM.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void failsOnBrokenDom() throws Exception {
+        new Phandom("<html> broken").dom();
+    }
+
+    /**
+     * Phandom can fail on a broken javascript.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void failsOnBrokenJavascript() throws Exception {
+        new Phandom(
+            "<html><body><script>a.call();</script></body></html>"
+        ).dom();
+    }
+
 }
