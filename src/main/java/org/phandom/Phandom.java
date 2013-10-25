@@ -114,7 +114,7 @@ public final class Phandom {
         if (code != 0) {
             throw new IOException(
                 String.format(
-                    "phantomjs failed with exit code #%d: %s", code, stderr
+                    "phantomjs failed with exit code #%d", code
                 )
             );
         }

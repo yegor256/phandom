@@ -36,6 +36,7 @@ if (system.args.length === 1) {
     phantom.exit();
 }
 var start = Date.now();
+var failure = false;
 function stderr(msg) {
     var msec = Date.now() - start;
     system.stderr.writeLine((msec / 1000).toFixed(3) + ': ' + msg);
@@ -44,26 +45,39 @@ page.onConsoleMessage = function (msg) {
     stderr(msg);
 };
 page.onError = function(msg, trace) {
-    var msgStack = ['ERROR: ' + msg];
+    var stack = [];
     if (trace && trace.length) {
-        msgStack.push('TRACE:');
         trace.forEach(
             function(t) {
-                msgStack.push(' -> ' + t.file + ': ' + t.line + (t.function ? ' (in function "' + t.function + '")' : ''));
+                stack.push(
+                    '  ' + t.file + ': ' + t.line
+                    + (t.function ? ' (in ' + t.function + ')' : '')
+                );
             }
         );
     }
-    stderr(msgStack.join('\n'));
+    stderr('onError: ' + msg + '\n' + stack.join('\n'));
+    failure = true;
 };
 page.onAlert = function(msg) {
-    stderr('ALERT: ' + msg);
+    stderr('onAlert:  ' + msg);
 };
 page.onResourceError = function(resourceError) {
-    stderr('Unable to load resource (#' + resourceError.id + 'URL:' + resourceError.url + ')');
-    stderr('Error code: ' + resourceError.errorCode + '. Description: ' + resourceError.errorString);
+    stderr(
+        'onResourceError: unable to load resource #'
+        + resourceError.id + ' from "' + resourceError.url + '"'
+    );
+    stderr(
+        'onResourceError: error code #'
+        + resourceError.errorCode + ' with "'
+        + resourceError.errorString + '"'
+    );
 };
 page.onResourceRequested = function(requestData, networkRequest) {
-    stderr('Request (#' + requestData.id + '): ' + JSON.stringify(requestData));
+    stderr(
+        'onResourceRequested: #' + requestData.id
+        + ' with "' + JSON.stringify(requestData) + '"'
+    );
 };
 page.onLoadStarted = function() {
     var current = page.evaluate(
@@ -71,21 +85,25 @@ page.onLoadStarted = function() {
             return window.location.href;
         }
     );
-    stderr('Current page ' + current +' will disappear...');
-    stderr('Now loading a new page...');
+    stderr('onLoadStarted: current page ' + current + ' will disappear...');
+    stderr('onLoadStarted: now loading a new page...');
 };
 page.onLoadFinished = function(status) {
-    stderr('Status: ' + status);
+    stderr('onLoadFinished: status=' + status);
 };
 stderr('URL to render: ' + system.args[1]);
 page.open(
     system.args[1],
     function (status) {
-        if (status === 'success') {
-            console.log(page.content);
-        } else {
-            stderr(status);
+        if (failure) {
+            stderr('javascript errors, see log above');
+            phantom.exit(1);
         }
-        phantom.exit();
+        if (status !== 'success') {
+            stderr('page loading status is "' + status + '"');
+            phantom.exit(2);
+        }
+        console.log(page.content);
+        phantom.exit(0);
     }
 );

@@ -30,6 +30,7 @@
 package org.phandom;
 
 import com.rexsl.test.XhtmlMatchers;
+import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
@@ -58,19 +59,24 @@ public final class PhandomTest {
     }
 
     /**
-     * Phandom can fail on a broken DOM.
+     * Phandom can succeed on a broken DOM.
      * @throws Exception If some problem inside
      */
     @Test
-    public void failsOnBrokenDom() throws Exception {
-        new Phandom("<html> broken").dom();
+    public void succeedsOnBrokenDom() throws Exception {
+        MatcherAssert.assertThat(
+            XhtmlMatchers.xhtml(
+                new Phandom("<html> broken").dom()
+            ),
+            XhtmlMatchers.hasXPath("/html/head")
+        );
     }
 
     /**
      * Phandom can fail on a broken javascript.
      * @throws Exception If some problem inside
      */
-    @Test
+    @Test(expected = IOException.class)
     public void failsOnBrokenJavascript() throws Exception {
         new Phandom(
             "<html><body><script>a.call();</script></body></html>"
