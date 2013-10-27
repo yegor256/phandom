@@ -46,6 +46,14 @@ phantom.onError = function(msg, trace) {
     phantom.exit(-1);
 };
 
+if (phantom.version.major * 100 + phantom.version.minor < 109) {
+    console.log(
+        'phantomjs version 1.9 or newer is required, yours is '
+        + phantom.version.major + '.' + phantom.version.minor
+    );
+    phantom.exit(-1);
+}
+
 // see https://github.com/ariya/phantomjs/wiki/API-Reference-WebPage
 var page = require('webpage').create();
 var system = require('system');
