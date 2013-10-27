@@ -52,16 +52,17 @@ public final class PhandomTest {
             XhtmlMatchers.xhtml(
                 new Phandom(
                     StringUtils.join(
-                        "<html><head>",
+                        "<!DOCTYPE html>",
+                        "<html xmlns='http://www.w3.org/1999/xhtml'><head>",
                         "<meta content='hi there' name='description'>",
                         "</head><body><p>Hey!</p></body></html>"
                     )
                 ).dom()
             ),
             XhtmlMatchers.hasXPaths(
-                "/html/body",
-                "/html/head/meta[name='description']",
-                "//p[.='Hey!']"
+                "/xhtml:html/xhtml:body",
+                "/xhtml:html/xhtml:head/xhtml:meta[name='description']",
+                "//xhtml:p[.='Hey!']"
             )
         );
     }
@@ -76,7 +77,7 @@ public final class PhandomTest {
             XhtmlMatchers.xhtml(
                 new Phandom("<html> broken").dom()
             ),
-            XhtmlMatchers.hasXPath("/html/head")
+            XhtmlMatchers.hasXPath("/html[head and body]")
         );
     }
 

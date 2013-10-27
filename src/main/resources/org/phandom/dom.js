@@ -103,7 +103,13 @@ page.open(
             stderr('page loading status is "' + status + '"');
             phantom.exit(2);
         }
-        console.log(page.content);
+        console.log(
+            page.evaluate(
+                function () {
+                    return new XMLSerializer().serializeToString(document);
+                }
+            )
+        );
         phantom.exit(0);
     }
 );
