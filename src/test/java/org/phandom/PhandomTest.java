@@ -30,6 +30,7 @@
 package org.phandom;
 
 import com.rexsl.test.XhtmlMatchers;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -54,14 +55,14 @@ public final class PhandomTest {
                         "<!DOCTYPE html>",
                         "<html><head>",
                         "<meta content='hi there' name='description'/>",
-                        "</head><body><p>Hey!</p><a href='#'/></body></html>"
+                        "</head><body><p>&euro;</p><a href='#'/></body></html>"
                     )
                 ).dom()
             ),
             XhtmlMatchers.hasXPaths(
                 "/html/body",
                 "/html/head/meta[@name='description']",
-                "//p[.='Hey!']"
+                "//p[.='\u20ac']"
             )
         );
     }
@@ -74,7 +75,7 @@ public final class PhandomTest {
     public void succeedsOnBrokenDom() throws Exception {
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
-                new Phandom("<html> broken").dom()
+                new Phandom(IOUtils.toInputStream("<html> broken")).dom()
             ),
             XhtmlMatchers.hasXPath("/html[head and body]")
         );
