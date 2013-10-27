@@ -5,12 +5,16 @@ you have an HTML page that has to be renderable in a browser and you
 want to validate this fact:
 
 ```java
+import com.rexsl.test.XhtmlMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
+import org.phandom.Phandom;
 public class HtmlTest {
   @Test
   public void testPageRenderability() {
     MatcherAssert.assertThat(
       new Phandom("<html><body><p>Hey!</p></body></html>").dom(),
-      XhtmlMatchers.hasXPath("//xhtml:p[.='Hey!']")
+      XhtmlMatchers.hasXPath("//p[.='Hey!']")
     );
   }
 }
@@ -24,7 +28,7 @@ Just use this dependency in Maven:
 <dependency>
   <groupId>com.jcabi.incubator</groupId>
   <artifactId>phandom</artifactId>
-  <version>0.1</version>
+  <version>0.1.1</version>
 </dependency>
 ```
 
@@ -37,9 +41,7 @@ your changes and apply them to the `master` branch shortly, provided
 they don't violate our quality standards. To avoid frustration, before
 sending us your pull request please run full Maven build:
 
-```
-$ mvn clean install -Pqulice
-```
+> $ mvn clean install -Pqulice
 
 ## Got questions?
 
