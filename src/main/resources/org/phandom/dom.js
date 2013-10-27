@@ -30,12 +30,28 @@
 
 /*global require: false, phantom: false, console: false, window: false */
 
+phantom.onError = function(msg, trace) {
+    var stack = [];
+    if (trace && trace.length) {
+        trace.forEach(
+            function (t) {
+                stack.push(
+                    '  |- ' + t.file + ': ' + t.line
+                    + (t['function'] ? ' (in ' + t['function'] + ')' : '')
+                );
+            }
+        );
+    }
+    console.log('phantom.onError: ' + msg + '\n' + stack.join('\n'));
+    phantom.exit(-1);
+};
+
 // see https://github.com/ariya/phantomjs/wiki/API-Reference-WebPage
 var page = require('webpage').create();
 var system = require('system');
 if (system.args.length === 1) {
     console.log('Usage: dom.js <file-path>');
-    phantom.exit();
+    phantom.exit(-1);
 }
 var start = Date.now();
 var failure = false;
