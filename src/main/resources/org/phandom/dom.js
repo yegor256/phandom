@@ -67,6 +67,7 @@ function stderr(msg) {
     var msec = Date.now() - start;
     system.stderr.writeLine((msec / 1000).toFixed(3) + ': ' + msg);
 }
+stderr('phantomjs ' + phantom.version.major + '.' + phantom.version.minor);
 page.onConsoleMessage = function (msg) {
     stderr(msg);
 };
