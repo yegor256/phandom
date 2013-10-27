@@ -106,7 +106,7 @@ page.open(
         console.log(
             page.evaluate(
                 function () {
-                    return new XMLSerializer().serializeToString(document);
+                    return new XMLSerializer().serializeToString(document.documentElement);
                 }
             )
         );

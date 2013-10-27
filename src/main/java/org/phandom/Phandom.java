@@ -31,7 +31,7 @@ package org.phandom;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
-import com.jcabi.log.Logger;
+import com.jcabi.log.VerboseProcess;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -89,6 +89,17 @@ public final class Phandom {
      * @throws IOException If fails
      */
     public Document dom() throws IOException {
+        final Process proc = this.builder().start();
+        proc.getOutputStream().close();
+        return Phandom.parse(new VerboseProcess(proc).stdout());
+    }
+
+    /**
+     * Create process builder.
+     * @return Builder
+     * @throws IOException If fails
+     */
+    public ProcessBuilder builder() throws IOException {
         final File script = Phandom.temp(
             this.getClass().getResourceAsStream("dom.js"),
             ".js"
@@ -97,33 +108,9 @@ public final class Phandom {
             new ByteArrayInputStream(this.page.getBytes(Charsets.UTF_8)),
             ".html"
         );
-        final Process proc = new ProcessBuilder(
+        return new ProcessBuilder(
             "phantomjs", script.getAbsolutePath(), src.getAbsolutePath()
-        ).start();
-        proc.getOutputStream().close();
-        final int code;
-        try {
-            code = proc.waitFor();
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-            throw new IOException(ex);
-        }
-        final String stderr = IOUtils.toString(
-            proc.getErrorStream(), Charsets.UTF_8
         );
-        if (code != 0) {
-            throw new IOException(
-                String.format(
-                    "phantomjs failed with exit code #%d", code
-                )
-            );
-        }
-        final String stdout = IOUtils.toString(
-            proc.getInputStream(), Charsets.UTF_8
-        );
-        Logger.debug(this, "STDERR:\n%s", stderr);
-        Logger.debug(this, "DOM:\n%s", stdout);
-        return Phandom.parse(stdout);
     }
 
     /**
