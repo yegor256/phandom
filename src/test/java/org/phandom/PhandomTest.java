@@ -30,7 +30,6 @@
 package org.phandom;
 
 import com.rexsl.test.XhtmlMatchers;
-import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -53,16 +52,16 @@ public final class PhandomTest {
                 new Phandom(
                     StringUtils.join(
                         "<!DOCTYPE html>",
-                        "<html xmlns='http://www.w3.org/1999/xhtml'><head>",
+                        "<html><head>",
                         "<meta content='hi there' name='description'/>",
                         "</head><body><p>Hey!</p><a href='#'/></body></html>"
                     )
                 ).dom()
             ),
             XhtmlMatchers.hasXPaths(
-                "/xhtml:html/xhtml:body",
-                "/xhtml:html/xhtml:head/xhtml:meta[name='description']",
-                "//xhtml:p[.='Hey!']"
+                "/html/body",
+                "/html/head/meta[@name='description']",
+                "//p[.='Hey!']"
             )
         );
     }
@@ -85,7 +84,7 @@ public final class PhandomTest {
      * Phandom can fail on a broken javascript.
      * @throws Exception If some problem inside
      */
-    @Test(expected = IOException.class)
+    @Test(expected = RuntimeException.class)
     public void failsOnBrokenJavascript() throws Exception {
         new Phandom(
             "<html><body><script>a.call();</script></body></html>"

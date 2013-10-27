@@ -28,6 +28,8 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*global require: false, phantom: false, console: false, window: false */
+
 // see https://github.com/ariya/phantomjs/wiki/API-Reference-WebPage
 var page = require('webpage').create();
 var system = require('system');
@@ -48,10 +50,10 @@ page.onError = function(msg, trace) {
     var stack = [];
     if (trace && trace.length) {
         trace.forEach(
-            function(t) {
+            function (t) {
                 stack.push(
                     '  ' + t.file + ': ' + t.line
-                    + (t.function ? ' (in ' + t.function + ')' : '')
+                    + (t['function'] ? ' (in ' + t['function'] + ')' : '')
                 );
             }
         );
@@ -106,7 +108,118 @@ page.open(
         console.log(
             page.evaluate(
                 function () {
-                    return new XMLSerializer().serializeToString(document.documentElement);
+                    /**
+                    * borrowed from https://github.com/jindw/xmldom
+                    */
+                    var ELEMENT_NODE = 1,
+                        ATTRIBUTE_NODE = 2,
+                        TEXT_NODE = 3,
+                        CDATA_SECTION_NODE = 4,
+                        ENTITY_REFERENCE_NODE = 5,
+                        ENTITY_NODE = 6,
+                        PROCESSING_INSTRUCTION_NODE = 7,
+                        COMMENT_NODE = 8,
+                        DOCUMENT_NODE = 9,
+                        DOCUMENT_TYPE_NODE = 10,
+                        DOCUMENT_FRAGMENT_NODE = 11,
+                        NOTATION_NODE = 12,
+                        buf = [];
+                    function _xmlEncoder(c) {
+                        return (c === '<' && '&lt;')
+                            || (c === '>' && '&gt;')
+                            || (c === '&' && '&amp;')
+                            || (c === '"' && '&quot;')
+                            || '&#' + c.charCodeAt() + ';';
+                    }
+                    function serialize(node, buf) {
+                        var attrs = node.attributes,
+                            len = attrs ? attrs.length : 0,
+                            child = node.firstChild,
+                            nodeName = node.tagName,
+                            isHTML = 'http://www.w3.org/1999/xhtml' === node.namespaceURI,
+                            i = 0,
+                            pubid = node.publicId,
+                            sysid = node.systemId,
+                            sub = node.internalSubset;
+                        switch(node.nodeType) {
+                            case ELEMENT_NODE:
+                                buf.push('<', nodeName.toLowerCase());
+                                for (; i<len; i++) {
+                                    serialize(attrs.item(i), buf, isHTML);
+                                }
+                                if (child || (isHTML && !/^(?:meta|link|img|br|hr|input)$/i.test(nodeName))) {
+                                    buf.push('>');
+                                    if (isHTML && /^script$/i.test(nodeName)) {
+                                        if (child) {
+                                            buf.push(child.data);
+                                        }
+                                    } else {
+                                        while (child) {
+                                            serialize(child,buf);
+                                            child = child.nextSibling;
+                                        }
+                                    }
+                                    buf.push('</', nodeName.toLowerCase(), '>');
+                                } else {
+                                    buf.push('/>');
+                                }
+                                break;
+                            case DOCUMENT_NODE:
+                            case DOCUMENT_FRAGMENT_NODE:
+                                while (child) {
+                                    serialize(child, buf);
+                                    child = child.nextSibling;
+                                }
+                                break;
+                            case ATTRIBUTE_NODE:
+                                buf.push(
+                                    ' ',
+                                    node.name.toLowerCase(), '="' ,
+                                    node.value.replace(/[<&"]/g,_xmlEncoder),
+                                    '"'
+                                );
+                                break;
+                            case TEXT_NODE:
+                                buf.push(node.data.replace(/[<&]/g,_xmlEncoder));
+                                break;
+                            case CDATA_SECTION_NODE:
+                                buf.push( '<![CDATA[', node.data, ']]>');
+                                break;
+                            case COMMENT_NODE:
+                                buf.push( "<!--", node.data, "-->");
+                                break;
+                            case DOCUMENT_TYPE_NODE:
+                                buf.push('<!DOCTYPE ', node.name);
+                                if (pubid) {
+                                    buf.push(' PUBLIC "', pubid);
+                                    if (sysid && sysid !== '.') {
+                                        buf.push( '" "', sysid);
+                                    }
+                                    buf.push('">');
+                                } else if (sysid && sysid !== '.') {
+                                    buf.push(' SYSTEM "', sysid, '">');
+                                } else {
+                                    if (sub) {
+                                        buf.push(' [', sub, ']');
+                                    }
+                                    buf.push('>');
+                                }
+                                break;
+                            case PROCESSING_INSTRUCTION_NODE:
+                                buf.push( "<?", node.target, " ", node.data, "?>");
+                                break;
+                            case ENTITY_REFERENCE_NODE:
+                                buf.push( '&', node.nodeName.toLowerCase(), ';');
+                                break;
+                            //case ENTITY_NODE:
+                            //case NOTATION_NODE:
+                            default:
+                                buf.push('??', node.nodeName);
+                                break;
+                        }
+                    }
+                    serialize(document, buf);
+                    return buf.join('');
                 }
             )
         );
