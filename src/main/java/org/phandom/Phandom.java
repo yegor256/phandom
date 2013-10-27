@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
 import javax.validation.constraints.NotNull;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -91,7 +92,9 @@ public final class Phandom {
     public Document dom() throws IOException {
         final Process proc = this.builder().start();
         proc.getOutputStream().close();
-        return Phandom.parse(new VerboseProcess(proc).stdout());
+        return Phandom.parse(
+            new VerboseProcess(proc, Level.FINE, Level.FINE).stdout()
+        );
     }
 
     /**

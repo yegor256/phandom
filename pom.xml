@@ -37,7 +37,7 @@
     </parent>
     <groupId>com.jcabi.incubator</groupId>
     <artifactId>phandom</artifactId>
-    <version>0.1</version>
+    <version>0.1.1</version>
     <packaging>jar</packaging>
     <name>phandom</name>
     <description>PhantomJS Java DOM builder</description>
@@ -104,7 +104,7 @@
         <dependency>
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-log</artifactId>
-            <version>0.10.1</version>
+            <version>0.11</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
