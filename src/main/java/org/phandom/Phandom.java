@@ -130,11 +130,17 @@ public final class Phandom {
      * @since 0.2
      */
     public static boolean isInstalled() {
-        return Phandom.VERSION.matcher(
-            new VerboseProcess(
-                new ProcessBuilder(Phandom.BIN, "--version")
-            ).stdoutQuietly()
-        ).matches();
+        boolean installed;
+        try {
+            installed = Phandom.VERSION.matcher(
+                new VerboseProcess(
+                    new ProcessBuilder(Phandom.BIN, "--version")
+                ).stdoutQuietly()
+            ).matches();
+        } catch (IllegalStateException ex) {
+            installed = false;
+        }
+        return installed;
     }
 
     /**
