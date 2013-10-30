@@ -172,10 +172,10 @@ page.open(
                             pubid = node.publicId,
                             sysid = node.systemId,
                             sub = node.internalSubset;
-                        switch(node.nodeType) {
+                        switch (node.nodeType) {
                             case ELEMENT_NODE:
                                 buf.push('<', nodeName.toLowerCase());
-                                for (; i<len; i++) {
+                                for (; i < len; i++) {
                                     serialize(attrs.item(i), buf, isHTML);
                                 }
                                 if (child || (isHTML && !/^(?:meta|link|img|br|hr|input)$/i.test(nodeName))) {
@@ -186,7 +186,7 @@ page.open(
                                         }
                                     } else {
                                         while (child) {
-                                            serialize(child,buf);
+                                            serialize(child, buf);
                                             child = child.nextSibling;
                                         }
                                     }
@@ -214,10 +214,10 @@ page.open(
                                 buf.push(node.data.replace(/[<&]/g,_xmlEncoder));
                                 break;
                             case CDATA_SECTION_NODE:
-                                buf.push( '<![CDATA[', node.data, ']]>');
+                                buf.push('<![CDATA[', node.data, ']]>');
                                 break;
                             case COMMENT_NODE:
-                                buf.push( "<!--", node.data, "-->");
+                                buf.push("<!--", node.data, "-->");
                                 break;
                             case DOCUMENT_TYPE_NODE:
                                 buf.push('<!DOCTYPE ', node.name);
@@ -237,10 +237,10 @@ page.open(
                                 }
                                 break;
                             case PROCESSING_INSTRUCTION_NODE:
-                                buf.push( "<?", node.target, " ", node.data, "?>");
+                                buf.push("<?", node.target, " ", node.data, "?>");
                                 break;
                             case ENTITY_REFERENCE_NODE:
-                                buf.push( '&', node.nodeName.toLowerCase(), ';');
+                                buf.push('&', node.nodeName.toLowerCase(), ';');
                                 break;
                             //case ENTITY_NODE:
                             //case NOTATION_NODE:
