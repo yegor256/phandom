@@ -33,6 +33,8 @@ import com.rexsl.test.XhtmlMatchers;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.MatcherAssert;
+import org.junit.Assume;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -41,6 +43,14 @@ import org.junit.Test;
  * @version $Id$
  */
 public final class PhandomTest {
+
+    /**
+     * Check for Phantomjs availability.
+     */
+    @Before
+    public void installed() {
+        Assume.assumeTrue(Phandom.isInstalled());
+    }
 
     /**
      * Phandom can build DOM document.

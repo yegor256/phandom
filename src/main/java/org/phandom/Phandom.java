@@ -63,6 +63,11 @@ import org.xml.sax.SAXException;
 public final class Phandom {
 
     /**
+     * Name of binary phantomjs.
+     */
+    private static final String BIN = "phantomjs";
+
+    /**
      * Content of the page to render.
      */
     private final transient String page;
@@ -82,6 +87,16 @@ public final class Phandom {
      */
     public Phandom(@NotNull final InputStream stream) throws IOException {
         this(IOUtils.toString(stream, CharEncoding.UTF_8));
+    }
+
+    /**
+     * PhantomJS binary is installed?
+     * @return TRUE if installed
+     */
+    public static boolean isInstalled() {
+        return new VerboseProcess(
+            new ProcessBuilder(Phandom.BIN, "--version")
+        ).stdoutQuietly().matches("\\d+\\.\\d+\\.\\d+");
     }
 
     /**
@@ -112,7 +127,7 @@ public final class Phandom {
             ".html"
         );
         return new ProcessBuilder(
-            "phantomjs", script.getAbsolutePath(), src.getAbsolutePath()
+            Phandom.BIN, script.getAbsolutePath(), src.getAbsolutePath()
         );
     }
 
