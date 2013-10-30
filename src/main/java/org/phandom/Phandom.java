@@ -37,7 +37,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.logging.Level;
+import java.util.regex.Pattern;
 import javax.validation.constraints.NotNull;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -54,7 +56,9 @@ import org.xml.sax.SAXException;
  *
  * <p>Use it to parse XML/XHTML/HTML document using PhantomJS, for example:
  *
- * <pre>Document dom = new Phandom("<html><p>Hey!</p></html>").dom();
+ * <pre>Document dom = new Phandom(
+ *   "&lt;html&gt;&lt;p&gt;Hey!&lt;/p&gt;&lt;/html&gt;"
+ * ).dom();
  * Element element = dom.getElementByTag("p");</pre>
  *
  * <p>The most popular use case for the class would be its usage
@@ -71,7 +75,7 @@ import org.xml.sax.SAXException;
  *   public void testPageRenderability() {
  *     Assume.assumeTrue(Phandom.isInstalled());
  *     MatcherAssert.assertThat(
- *       new Phandom("<html><p>Hey!</p></html>").dom(),
+ *       new Phandom("&lt;html>&lt;p>Hey!&lt;/p>&lt;/html>").dom(),
  *       XhtmlMatchers.hasXPath("//body/p[.='Hey!']")
  *     );
  *   }
@@ -91,6 +95,12 @@ public final class Phandom {
      * Name of binary phantomjs.
      */
     private static final String BIN = "phantomjs";
+
+    /**
+     * Pattern to match phantomjs version.
+     */
+    private static final Pattern VERSION =
+        Pattern.compile("\\d+\\.\\d+\\.\\d+");
 
     /**
      * Content of the page to render.
@@ -120,9 +130,11 @@ public final class Phandom {
      * @since 0.2
      */
     public static boolean isInstalled() {
-        return new VerboseProcess(
-            new ProcessBuilder(Phandom.BIN, "--version")
-        ).stdoutQuietly().matches("\\d+\\.\\d+\\.\\d+");
+        return Phandom.VERSION.matcher(
+            new VerboseProcess(
+                new ProcessBuilder(Phandom.BIN, "--version")
+            ).stdoutQuietly()
+        ).matches();
     }
 
     /**
@@ -131,10 +143,10 @@ public final class Phandom {
      * @throws IOException If fails
      */
     public Document dom() throws IOException {
-        final Process proc = this.builder().start();
-        proc.getOutputStream().close();
+        final Process process = this.builder().start();
+        process.getOutputStream().close();
         return Phandom.parse(
-            new VerboseProcess(proc, Level.FINE, Level.FINE).stdout()
+            new VerboseProcess(process, Level.FINE, Level.FINE).stdout()
         );
     }
 
@@ -144,17 +156,21 @@ public final class Phandom {
      * @throws IOException If fails
      */
     public ProcessBuilder builder() throws IOException {
-        final File script = Phandom.temp(
-            this.getClass().getResourceAsStream("dom.js"),
-            ".js"
-        );
-        final File src = Phandom.temp(
-            new ByteArrayInputStream(this.page.getBytes(Charsets.UTF_8)),
-            ".html"
-        );
-        return new ProcessBuilder(
-            Phandom.BIN, script.getAbsolutePath(), src.getAbsolutePath()
-        );
+        final InputStream src = this.getClass().getResourceAsStream("dom.js");
+        try {
+            return new ProcessBuilder(
+                Phandom.BIN,
+                Phandom.temp(src, ".js").getAbsolutePath(),
+                Phandom.temp(
+                    new ByteArrayInputStream(
+                        this.page.getBytes(Charsets.UTF_8)
+                    ),
+                    ".html"
+                ).getAbsolutePath()
+            );
+        } finally {
+            src.close();
+        }
     }
 
     /**
@@ -185,7 +201,12 @@ public final class Phandom {
     private static File temp(final InputStream content, final String ext)
         throws IOException {
         final File file = File.createTempFile("phandom-", ext);
-        IOUtils.copy(content, new FileOutputStream(file));
+        final OutputStream output = new FileOutputStream(file);
+        try {
+            IOUtils.copy(content, output);
+        } finally {
+            output.close();
+        }
         return file;
     }
 
