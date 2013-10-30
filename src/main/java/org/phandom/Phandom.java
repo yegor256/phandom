@@ -52,6 +52,31 @@ import org.xml.sax.SAXException;
 /**
  * PhantomJS DOM.
  *
+ * <p>Use it to parse XML/XHTML/HTML document using PhantomJS, for example:
+ *
+ * <pre>Document dom = new Phandom("<html><p>Hey!</p></html>").dom();
+ * Element element = dom.getElementByTag("p");</pre>
+ *
+ * <p>The most popular use case for the class would be its usage
+ * in a unit test, to make sure your HTML document (together with its
+ * embedded JavaScript scripts) is renderable by a browser:
+ *
+ * <pre>import com.rexsl.test.XhtmlMatchers;
+ * import org.hamcrest.MatcherAssert;
+ * import org.junit.Assume;
+ * import org.junit.Test;
+ * import org.phandom.Phandom;
+ * public class HtmlTest {
+ *   &#64;Test
+ *   public void testPageRenderability() {
+ *     Assume.assumeTrue(Phandom.isInstalled());
+ *     MatcherAssert.assertThat(
+ *       new Phandom("<html><p>Hey!</p></html>").dom(),
+ *       XhtmlMatchers.hasXPath("//body/p[.='Hey!']")
+ *     );
+ *   }
+ * }</pre>
+ *
  * @author Yegor Bugayenko (yegor@tpc2.com)
  * @version $Id$
  * @since 0.1
@@ -92,6 +117,7 @@ public final class Phandom {
     /**
      * PhantomJS binary is installed?
      * @return TRUE if installed
+     * @since 0.2
      */
     public static boolean isInstalled() {
         return new VerboseProcess(
