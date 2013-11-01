@@ -134,7 +134,8 @@ public final class Phandom {
         try {
             installed = Phandom.VERSION.matcher(
                 new VerboseProcess(
-                    new ProcessBuilder(Phandom.BIN, "--version")
+                    new ProcessBuilder(Phandom.BIN, "--version"),
+                    Level.FINE, Level.FINE
                 ).stdoutQuietly()
             ).matches();
         } catch (IllegalStateException ex) {
