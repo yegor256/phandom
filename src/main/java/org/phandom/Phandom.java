@@ -46,6 +46,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.commons.io.Charsets;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.w3c.dom.Document;
@@ -186,7 +187,10 @@ public final class Phandom {
      */
     private static Document parse(final String xml) throws IOException {
         if (xml.isEmpty()) {
-            throw new IOException("empty XML");
+            throw new IOException(
+                // @checkstyle LineLength (1 line)
+                "phantomjs produced an empty output instead of HTML, looks like an internal bug of phandom"
+            );
         }
         try {
             return DocumentBuilderFactory.newInstance()
@@ -209,6 +213,7 @@ public final class Phandom {
     private static File temp(final InputStream content, final String ext)
         throws IOException {
         final File file = File.createTempFile("phandom-", ext);
+        FileUtils.forceDeleteOnExit(file);
         final OutputStream output = new FileOutputStream(file);
         try {
             IOUtils.copy(content, output);
