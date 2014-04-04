@@ -114,7 +114,7 @@ public final class PhandomTest {
                 new Phandom(
                     new StringBuilder(Tv.MILLION)
                         .append("<html><body>")
-                        .append(StringUtils.repeat("<p>hello</p>", Tv.THOUSAND))
+                        .append(StringUtils.repeat("<p>&lt;\n</p>", Tv.HUNDRED))
                         .append("</body></html>")
                         .toString()
                 ).dom()
