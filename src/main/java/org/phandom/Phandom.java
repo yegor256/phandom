@@ -138,7 +138,7 @@ public final class Phandom {
                     Level.FINE, Level.FINE
                 ).stdoutQuietly()
             ).matches();
-        } catch (IllegalStateException ex) {
+        } catch (final IllegalStateException ex) {
             installed = false;
         }
         return installed;
@@ -191,9 +191,9 @@ public final class Phandom {
             return DocumentBuilderFactory.newInstance()
                 .newDocumentBuilder()
                 .parse(IOUtils.toInputStream(xml, CharEncoding.UTF_8));
-        } catch (ParserConfigurationException ex) {
+        } catch (final ParserConfigurationException ex) {
             throw new IOException(xml, ex);
-        } catch (SAXException ex) {
+        } catch (final SAXException ex) {
             throw new IOException(xml, ex);
         }
     }
