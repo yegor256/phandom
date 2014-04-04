@@ -63,9 +63,9 @@ public final class PhandomTest {
             XhtmlMatchers.xhtml(
                 new Phandom(
                     StringUtils.join(
-                        "<!DOCTYPE html>",
-                        "<html><head>",
-                        "<meta content='hi there' name='description'/>",
+                        "<!DOCTYPE html>\n",
+                        "<html><head>\n",
+                        "<meta content='hi there' name='description'/>\n",
                         "</head><body><p>&euro;</p><a href='#'/></body></html>"
                     )
                 ).dom()
@@ -86,7 +86,7 @@ public final class PhandomTest {
     public void succeedsOnBrokenDom() throws Exception {
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
-                new Phandom(IOUtils.toInputStream("<html> broken")).dom()
+                new Phandom(IOUtils.toInputStream("<html>\nbroken")).dom()
             ),
             XhtmlMatchers.hasXPath("/html[head and body]")
         );
@@ -99,7 +99,7 @@ public final class PhandomTest {
     @Test(expected = RuntimeException.class)
     public void failsOnBrokenJavascript() throws Exception {
         new Phandom(
-            "<html><body><script>a.call();</script></body></html>"
+            "<html><body><script>a.call();</script>\n</body></html>"
         ).dom();
     }
 
@@ -113,13 +113,13 @@ public final class PhandomTest {
             XhtmlMatchers.xhtml(
                 new Phandom(
                     new StringBuilder(Tv.MILLION)
-                        .append("<html><body>")
+                        .append("<html><body>\n")
                         .append(StringUtils.repeat("<p>&lt;\n</p>", Tv.HUNDRED))
-                        .append("</body></html>")
+                        .append("</body></html>\n\n")
                         .toString()
                 ).dom()
             ),
-            XhtmlMatchers.hasXPath("/html/body[count(p)=1000]")
+            XhtmlMatchers.hasXPath("/html/body[count(p)=100]")
         );
     }
 

@@ -185,6 +185,9 @@ public final class Phandom {
      * @throws IOException If fails
      */
     private static Document parse(final String xml) throws IOException {
+        if (xml.isEmpty()) {
+            throw new IOException("empty XML");
+        }
         try {
             return DocumentBuilderFactory.newInstance()
                 .newDocumentBuilder()

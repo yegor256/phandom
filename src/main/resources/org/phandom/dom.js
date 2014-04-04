@@ -30,6 +30,45 @@
 
 /*global require: false, phantom: false, console: false, window: false */
 
+/*
+ * exit
+ * https://github.com/cowboy/node-exit
+ *
+ * Copyright (c) 2013 "Cowboy" Ben Alman
+ * Licensed under the MIT license.
+ */
+
+'use strict';
+
+// see https://github.com/cowboy/node-exit/blob/master/lib/exit.js
+function exit (exitCode) {
+    var drainCount = 0;
+    function tryToExit() {
+        if (drainCount === 1) {
+            process.exit(exitCode);
+        }
+    }
+    if (process.stdout.bufferSize === 0) {
+        drainCount++;
+    } else {
+        stream.write(
+            '', 'utf-8',
+            function() {
+                drainCount++;
+                tryToExit();
+            }
+        );
+    }
+    stream.write = function() {};
+    tryToExit();
+    process.on(
+        'exit',
+        function() {
+            process.exit(exitCode);
+        }
+    );
+};
+
 phantom.onError = function(msg, trace) {
     var stack = [];
     if (trace && trace.length) {
