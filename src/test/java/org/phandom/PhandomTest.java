@@ -29,6 +29,7 @@
  */
 package org.phandom;
 
+import com.jcabi.aspects.Tv;
 import com.rexsl.test.XhtmlMatchers;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -100,6 +101,26 @@ public final class PhandomTest {
         new Phandom(
             "<html><body><script>a.call();</script></body></html>"
         ).dom();
+    }
+
+    /**
+     * Phandom can parse a huge HTML.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void parsesLongHtml() throws Exception {
+        MatcherAssert.assertThat(
+            XhtmlMatchers.xhtml(
+                new Phandom(
+                    new StringBuilder(Tv.MILLION)
+                        .append("<html><body>")
+                        .append(StringUtils.repeat("<p>hello</p>", Tv.THOUSAND))
+                        .append("</body></html>")
+                        .toString()
+                ).dom()
+            ),
+            XhtmlMatchers.hasXPath("/html/body[count(p)=1000]")
+        );
     }
 
 }
