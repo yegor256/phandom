@@ -29,7 +29,6 @@
  */
 package org.phandom;
 
-import com.jcabi.aspects.Tv;
 import com.rexsl.test.XhtmlMatchers;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -113,14 +112,20 @@ public final class PhandomTest {
             XhtmlMatchers.xhtml(
                 new Phandom(
                     StringUtils.join(
-                        "<html><head>",
-                        "<body>",
-                        StringUtils.repeat("<p>&lt;\n\n</p>", Tv.HUNDRED),
-                        "</body></html>\n\n"
+                        "<html><head><script>//<![CDATA[\n",
+                        "function onLoad() {",
+                        "for (i=0; i<1000; ++i) {",
+                        "var div = document.createElement('div');",
+                        "div.innerHTML = '&lt;&#10;<b>&gt;</b>&#10;&amp;';",
+                        "div.style.color = 'red';",
+                        "div.setAttribute('class', 'foo');",
+                        "document.body.appendChild(div);",
+                        "}}\n//]]></script></head>",
+                        "<body onload='onLoad();'></body></html>\n\n"
                     )
                 ).dom()
             ),
-            XhtmlMatchers.hasXPath("/html/body[count(p)=100]")
+            XhtmlMatchers.hasXPath("/html/body[count(div)=1000]")
         );
     }
 
