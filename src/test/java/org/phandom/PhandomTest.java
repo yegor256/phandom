@@ -112,11 +112,12 @@ public final class PhandomTest {
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
                 new Phandom(
-                    new StringBuilder(Tv.MILLION)
-                        .append("<html><body>\n")
-                        .append(StringUtils.repeat("<p>&lt;\n</p>", Tv.HUNDRED))
-                        .append("</body></html>\n\n")
-                        .toString()
+                    StringUtils.join(
+                        "<html><head>",
+                        "<body>",
+                        StringUtils.repeat("<p>&lt;\n\n</p>", Tv.HUNDRED),
+                        "</body></html>\n\n"
+                    )
                 ).dom()
             ),
             XhtmlMatchers.hasXPath("/html/body[count(p)=100]")

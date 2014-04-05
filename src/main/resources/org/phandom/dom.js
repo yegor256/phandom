@@ -255,10 +255,6 @@ page.open(
             )
         );
         // see http://stackoverflow.com/questions/22872162
-        setTimeout(
-            function() { phantom.exit(0); },
-            100
-        );
-
+        setTimeout(function() { phantom.exit(0); }, 100);
     }
 );

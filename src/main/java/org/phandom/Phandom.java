@@ -31,6 +31,7 @@ package org.phandom;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
+import com.jcabi.log.Logger;
 import com.jcabi.log.VerboseProcess;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -197,8 +198,16 @@ public final class Phandom {
                 .newDocumentBuilder()
                 .parse(IOUtils.toInputStream(xml, CharEncoding.UTF_8));
         } catch (final ParserConfigurationException ex) {
+            Logger.warn(
+                Phandom.class,
+                "XML parsing failure on HTML by phantomjs:\n%s", xml
+            );
             throw new IOException(xml, ex);
         } catch (final SAXException ex) {
+            Logger.warn(
+                Phandom.class,
+                "SAX failure on HTML by phantomjs:\n%s", xml
+            );
             throw new IOException(xml, ex);
         }
     }
