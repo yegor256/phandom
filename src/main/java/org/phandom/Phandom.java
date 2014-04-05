@@ -202,13 +202,13 @@ public final class Phandom {
                 Phandom.class,
                 "XML parsing failure on HTML by phantomjs:\n%s", xml
             );
-            throw new IOException(xml, ex);
+            throw new IOException("internal parsing error of phandom", ex);
         } catch (final SAXException ex) {
             Logger.warn(
                 Phandom.class,
                 "SAX failure on HTML by phantomjs:\n%s", xml
             );
-            throw new IOException(xml, ex);
+            throw new IOException("internal SAX error of phandom", ex);
         }
     }
 
