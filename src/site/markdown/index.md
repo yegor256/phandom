@@ -15,3 +15,6 @@ public class HtmlTest {
   }
 }
 ```
+
+Read [this blog](http://www.yegor256.com/2014/04/06/phandom.html)
+post for more informal explanation.
