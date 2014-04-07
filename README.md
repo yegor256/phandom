@@ -28,7 +28,7 @@ Just use this dependency in Maven:
 <dependency>
   <groupId>com.jcabi.incubator</groupId>
   <artifactId>phandom</artifactId>
-  <version>0.1.1</version>
+  <version>0.2.2</version>
 </dependency>
 ```
 
