@@ -24,6 +24,8 @@
                                             <link rel="stylesheet" href="./css/highlight.css" />
         <script src="./js/jquery-1.8.3.min.js"></script>
         <script src="./js/highlight-7.3.min.js"></script>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+        <link href="./css/jcabi.css" rel="stylesheet"/>
         <script>
             $(document).ready(
                 function() {
@@ -32,250 +34,243 @@
                             hljs.highlightBlock(element);
                         }
                     );
+                    $(".menu-button").click(
+                        function() {
+                            if ($("#here-goes-menu").attr("class") == "menu-off") {
+                                $("#menu").clone().attr("class", "mobile-menu").appendTo("#here-goes-menu");
+                                $("#here-goes-menu").attr("class", "menu-on");
+                            } else {
+                                $(".mobile-menu").hide();
+                                $("#here-goes-menu").attr("class", "menu-off");
+                            }
+                        }
+                    );
                 }
             );
         </script>
     </head>
     <body>
+                <div class="page">
+            <div class="menu-section">
                 <ul id="menu">
-                                                    <li>
-                    Overview
-                                            <ul>
-                                                                            <li>
-                                                                    <a href="index.html" title="Introduction">Introduction</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="apidocs-0.2.1/index.html" title="JavaDoc 0.2.1">JavaDoc 0.2.1</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="cobertura/index.html" title="Test Coverage">Test Coverage</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="changes-report.html" title="Release History">Release History</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                </ul>
-                                    </li>
-                            <li>
-                    Project Documentation
-                                            <ul>
-                                                                            <li>
-                                                                    <a href="project-info.html" title="Project Information">Project Information</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </li>
-                                                                                        <li>
-                                                                    <a href="project-reports.html" title="Project Reports">Project Reports</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <ul>
-                                                                            <li>
-                                                                    <a href="rempl.html" title="REMPL">REMPL</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="xref/index.html" title="Source Xref">Source Xref</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="xref-test/index.html" title="Test Source Xref">Test Source Xref</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="surefire-report.html" title="Surefire Report">Surefire Report</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                            <strong>                        <a href="changelog.html" title="Change Log">Change Log</a>
+                                                                                    <li>
+                            Overview
+                                                            <ul>
+                                                                                                    <li>
+                                                                                    <a href="index.html" title="Introduction">Introduction</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="apidocs-0.2.2/index.html" title="JavaDoc 0.2.2">JavaDoc 0.2.2</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="cobertura/index.html" title="Test Coverage">Test Coverage</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="releases" title="Release History">Release History</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                        </ul>
+                                                    </li>
+                                            <li>
+                            Project Documentation
+                                                            <ul>
+                                                                                                    <li>
+                                                                                    <a href="project-info.html" title="Project Information">Project Information</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </li>
+                                                                                                                        <li>
+                                                                                    <a href="project-reports.html" title="Project Reports">Project Reports</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <ul>
+                                                                                                    <li>
+                                                                                    <a href="rempl.html" title="REMPL">REMPL</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="xref-test/index.html" title="Test Source Xref">Test Source Xref</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="xref/index.html" title="Source Xref">Source Xref</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="surefire-report.html" title="Surefire Report">Surefire Report</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                            <strong>                        <a href="changelog.html" title="Change Log">Change Log</a>
         </strong>
-                                                                                                                <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="dev-activity.html" title="Developer Activity">Developer Activity</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="file-activity.html" title="File Activity">File Activity</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="dependency-updates-report.html" title="Dependency Updates Report">Dependency Updates Report</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="plugin-updates-report.html" title="Plugin Updates Report">Plugin Updates Report</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="apidocs-0.2.1/index.html" title="JavaDocs">JavaDocs</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="cobertura/index.html" title="Cobertura Test Coverage">Cobertura Test Coverage</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="github-report.html" title="GitHub Report">GitHub Report</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                </ul>
-                                    </li>
-                                                                </ul>
-                                    </li>
-                    </ul>
-        <div id="content">
-                            <a href="https://github.com/yegor256/phandom">
-                    <img style="position: absolute; top: 0; right: 0; border: 0; width: 100px; height: 100px;"
-                        src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"
-                        alt="Fork me on GitHub" />
-                </a>
+                                                                                                                                                                <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="dev-activity.html" title="Developer Activity">Developer Activity</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="file-activity.html" title="File Activity">File Activity</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="dependency-updates-report.html" title="Dependency Updates Report">Dependency Updates Report</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="plugin-updates-report.html" title="Plugin Updates Report">Plugin Updates Report</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="apidocs-0.2.2/index.html" title="JavaDocs">JavaDocs</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="cobertura/index.html" title="Cobertura Test Coverage">Cobertura Test Coverage</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="github-report.html" title="GitHub Report">GitHub Report</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                        </ul>
+                                                    </li>
+                                                                                        </ul>
+                                                    </li>
+                                    </ul>
+            </div>
+            <div id="right-side">
+                <div id="content">
+                    <i class="menu-button fa fa-align-justify"></i>
+                    <div class="logo-section">
                         <a href="http://www.phandom.org/" title="${decoration.bannerLeft.title}">
-                <img src="http://img.phandom.org/logo-256x256.png"
-                    alt="phandom.org"
-                                            width="64"
-                                                                height="64"
-                                    />
-            </a>
-                        <p>
-                
-                01-Nov-2013
-                0.2.1
-            </p>
-            <article>
-                <div class="section">
+                            <img src="http://img.phandom.org/logo-256x256.png"
+                                alt="phandom.org"
+                                                                    width="64"
+                                                                                                    height="64"
+                                                            />
+                        </a>
+                    </div>
+                    <div class="date">
+                        <div class="date-numbers">
+                            <strong>0.2.2</strong>
+                            
+                            07-Apr-2014
+                        </div>
+                                                                            <div class="github">
+                                <iframe
+                                    class="github-large"
+                                    src="http://ghbtns.com/github-btn.html?user=yegor256&amp;repo=phandom&amp;type=watch&amp;count=true&amp;size=large"
+                                    allowtransparency="true"
+                                    frameborder="0"
+                                    scrolling="0"
+                                    width="170"
+                                    height="30">
+                                </iframe>
+                                <iframe
+                                    class="github-small"
+                                    src="http://ghbtns.com/github-btn.html?user=yegor256&amp;repo=phandom&amp;type=watch&amp;count=true&amp;size=small"
+                                    allowtransparency="true"
+                                    frameborder="0"
+                                    scrolling="0"
+                                    width="170"
+                                    height="30">
+                                </iframe>
+                            </div>
+                                            </div>
+                    <div id="here-goes-menu" class="menu-off"></div>
+                    <article>
+                        <div class="section">
+                            <div class="section">
 <h2>Change Log Report<a name="Change_Log_Report"></a></h2>
 <p>Total number of changed sets: 1</p>
 <div class="section">
-<h3>Changes between 2013-10-02 and 2013-11-02<a name="Changes_between_2013-10-02_and_2013-11-02"></a></h3>
-<p>Total commits: 24<br />Total number of files changed: 7</p>
+<h3>Changes between 2014-03-08 and 2014-04-08<a name="Changes_between_2014-03-08_and_2014-04-08"></a></h3>
+<p>Total commits: 12<br />Total number of files changed: 6</p>
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Timestamp</th>
 <th>Author</th>
 <th>Details</th></tr>
 <tr class="b">
-<td>2013-11-01 13:38:02</td>
+<td>2014-04-07 09:29:50</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=2615e81c938573bcf3ed8c6edcb3c3a088d30f4d&amp;content-type=text/vnd.viewcvs-markup">v 2615e81c938573bcf3ed8c6edcb3c3a088d30f4d</a><br /><br />0.2.1</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/site/markdown/index.md">src/site/markdown/<b>index.md</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/site/markdown/index.md?rev=b84e203b090fea0194d82fee85dcd7bcbf6a58dc&amp;content-type=text/vnd.viewcvs-markup">v b84e203b090fea0194d82fee85dcd7bcbf6a58dc</a><br /><br />site fix</td></tr>
 <tr class="a">
-<td>2013-11-01 12:03:20</td>
+<td>2014-04-05 09:37:28</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=8b31f78e5eca4b37d01f86c3ae339327662f9fbf&amp;content-type=text/vnd.viewcvs-markup">v 8b31f78e5eca4b37d01f86c3ae339327662f9fbf</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=8b31f78e5eca4b37d01f86c3ae339327662f9fbf&amp;content-type=text/vnd.viewcvs-markup">v 8b31f78e5eca4b37d01f86c3ae339327662f9fbf</a><br /><br />log phandomjs version in DEBUG level</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=3a0269a945237d4aebac677fca0f1ddc377c308a&amp;content-type=text/vnd.viewcvs-markup">v 3a0269a945237d4aebac677fca0f1ddc377c308a</a><br /><br />test</td></tr>
 <tr class="b">
-<td>2013-10-30 11:31:40</td>
+<td>2014-04-05 09:04:35</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=8c2e284fffffcd5a51368cbb96569990ef438503&amp;content-type=text/vnd.viewcvs-markup">v 8c2e284fffffcd5a51368cbb96569990ef438503</a><br /><br />0.2</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=128cf3dbdac5bb5341d2106074421856098ea4ab&amp;content-type=text/vnd.viewcvs-markup">v 128cf3dbdac5bb5341d2106074421856098ea4ab</a><br /><br />nicer message</td></tr>
 <tr class="a">
-<td>2013-10-30 11:23:01</td>
+<td>2014-04-05 09:00:54</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=55762b762422fb358ae053c7c776b3c1f3644e7a&amp;content-type=text/vnd.viewcvs-markup">v 55762b762422fb358ae053c7c776b3c1f3644e7a</a><br /><br />#3 catch runtime exception</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=4f17a15b9440250eb42a22caadcb03e8d8e106f1&amp;content-type=text/vnd.viewcvs-markup">v 4f17a15b9440250eb42a22caadcb03e8d8e106f1</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=4f17a15b9440250eb42a22caadcb03e8d8e106f1&amp;content-type=text/vnd.viewcvs-markup">v 4f17a15b9440250eb42a22caadcb03e8d8e106f1</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=4f17a15b9440250eb42a22caadcb03e8d8e106f1&amp;content-type=text/vnd.viewcvs-markup">v 4f17a15b9440250eb42a22caadcb03e8d8e106f1</a><br /><br />more tests</td></tr>
 <tr class="b">
-<td>2013-10-30 10:13:07</td>
+<td>2014-04-04 22:51:46</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=590ef1923cd1831414c2cbe2601591188584dc78&amp;content-type=text/vnd.viewcvs-markup">v 590ef1923cd1831414c2cbe2601591188584dc78</a><br /><br />#3 polished</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=bdf398c7439962a21d0ab0d01401e01cbac8d43d&amp;content-type=text/vnd.viewcvs-markup">v bdf398c7439962a21d0ab0d01401e01cbac8d43d</a><br /><br />delete temp file on exit</td></tr>
 <tr class="a">
-<td>2013-10-30 10:11:54</td>
+<td>2014-04-04 22:30:28</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=b525e3d1981ed850d7734677225f77731cf18fb5&amp;content-type=text/vnd.viewcvs-markup">v b525e3d1981ed850d7734677225f77731cf18fb5</a><br /><br />#3 polished and refactored a bit</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=0992102b62d24a4b1140c45c2bef338d9970476d&amp;content-type=text/vnd.viewcvs-markup">v 0992102b62d24a4b1140c45c2bef338d9970476d</a><br /><br />0.2.2</td></tr>
 <tr class="b">
-<td>2013-10-30 10:05:10</td>
+<td>2014-04-04 22:30:05</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=73d2940de5ed8bafdf8141109c4792dc32ee838e&amp;content-type=text/vnd.viewcvs-markup">v 73d2940de5ed8bafdf8141109c4792dc32ee838e</a><br /><br />#3 extra doc</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=1781c60e9d0f079795766687f225a463e5ffd079&amp;content-type=text/vnd.viewcvs-markup">v 1781c60e9d0f079795766687f225a463e5ffd079</a><br /><br />workaround for console.log()</td></tr>
 <tr class="a">
-<td>2013-10-30 09:58:34</td>
+<td>2014-04-04 22:24:00</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=997fea5894090b06130b749164b7d8a34850e890&amp;content-type=text/vnd.viewcvs-markup">v 997fea5894090b06130b749164b7d8a34850e890</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=997fea5894090b06130b749164b7d8a34850e890&amp;content-type=text/vnd.viewcvs-markup">v 997fea5894090b06130b749164b7d8a34850e890</a><br /><br />#3 isInstalled() implemented and tested</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=af259266e6b0765a5f31b11eb8fbe3a7f8a83689&amp;content-type=text/vnd.viewcvs-markup">v af259266e6b0765a5f31b11eb8fbe3a7f8a83689</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=af259266e6b0765a5f31b11eb8fbe3a7f8a83689&amp;content-type=text/vnd.viewcvs-markup">v af259266e6b0765a5f31b11eb8fbe3a7f8a83689</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=af259266e6b0765a5f31b11eb8fbe3a7f8a83689&amp;content-type=text/vnd.viewcvs-markup">v af259266e6b0765a5f31b11eb8fbe3a7f8a83689</a><br /><br />more tests</td></tr>
 <tr class="b">
-<td>2013-10-27 21:55:17</td>
+<td>2014-04-04 20:53:53</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=1c9695c7d6d81d0d5107af2ddb7bf9fd7830411d&amp;content-type=text/vnd.viewcvs-markup">v 1c9695c7d6d81d0d5107af2ddb7bf9fd7830411d</a><br /><br />show patch version number</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=762aa28be9e7004565102c6a0863870430ed65f8&amp;content-type=text/vnd.viewcvs-markup">v 762aa28be9e7004565102c6a0863870430ed65f8</a><br /><br />bug reproduced</td></tr>
 <tr class="a">
-<td>2013-10-27 21:53:20</td>
+<td>2014-04-04 20:50:57</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=18b61e76b48e30bab4c889b70d08ed6c10d52f4f&amp;content-type=text/vnd.viewcvs-markup">v 18b61e76b48e30bab4c889b70d08ed6c10d52f4f</a><br /><br />test for input stream reading</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=a3a273ebb4e78ffe4d6c9e4d81c6cc7966d792bb&amp;content-type=text/vnd.viewcvs-markup">v a3a273ebb4e78ffe4d6c9e4d81c6cc7966d792bb</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=a3a273ebb4e78ffe4d6c9e4d81c6cc7966d792bb&amp;content-type=text/vnd.viewcvs-markup">v a3a273ebb4e78ffe4d6c9e4d81c6cc7966d792bb</a><br /><br />extra test for large HTML</td></tr>
 <tr class="b">
-<td>2013-10-27 21:48:57</td>
+<td>2014-04-04 20:44:28</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=42330e902f7de277f066f9c828d3593c5f6f07bb&amp;content-type=text/vnd.viewcvs-markup">v 42330e902f7de277f066f9c828d3593c5f6f07bb</a><br /><br />report phantomjs version in log</td></tr>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=c980853447d9ae367ab8776af3d1b9c47a1fccfb&amp;content-type=text/vnd.viewcvs-markup">v c980853447d9ae367ab8776af3d1b9c47a1fccfb</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=c980853447d9ae367ab8776af3d1b9c47a1fccfb&amp;content-type=text/vnd.viewcvs-markup">v c980853447d9ae367ab8776af3d1b9c47a1fccfb</a><br /><br />tests fixed</td></tr>
 <tr class="a">
-<td>2013-10-27 21:46:15</td>
+<td>2014-04-04 20:39:32</td>
 <td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=64828d58f17c9199a3b4cd763264aa7addcaca10&amp;content-type=text/vnd.viewcvs-markup">v 64828d58f17c9199a3b4cd763264aa7addcaca10</a><br /><br />require phantomjs of version 1.9 or newer</td></tr>
-<tr class="b">
-<td>2013-10-27 12:55:41</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=44171a1e339fd89da9654174212074a5518cb0b9&amp;content-type=text/vnd.viewcvs-markup">v 44171a1e339fd89da9654174212074a5518cb0b9</a><br /><br />snapshot</td></tr>
-<tr class="a">
-<td>2013-10-27 12:44:35</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=8744b07134b0d210a7aa9350bec800d1ecad3a62&amp;content-type=text/vnd.viewcvs-markup">v 8744b07134b0d210a7aa9350bec800d1ecad3a62</a><br /><br />check for phantom failures</td></tr>
-<tr class="b">
-<td>2013-10-27 12:18:34</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/README.md"><b>README.md</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/README.md?rev=4641f1bd449691701df46eb9ce113d696bd2dde9&amp;content-type=text/vnd.viewcvs-markup">v 4641f1bd449691701df46eb9ce113d696bd2dde9</a><br /><br />typo</td></tr>
-<tr class="a">
-<td>2013-10-27 12:18:14</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/README.md"><b>README.md</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/README.md?rev=74a0cdd369f315d2cf64477ce35cc11307a03822&amp;content-type=text/vnd.viewcvs-markup">v 74a0cdd369f315d2cf64477ce35cc11307a03822</a><br /><br />doc fixed</td></tr>
-<tr class="b">
-<td>2013-10-27 12:13:22</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=3cd1d0d79dc6e3f05b5a6c824812435438bf569a&amp;content-type=text/vnd.viewcvs-markup">v 3cd1d0d79dc6e3f05b5a6c824812435438bf569a</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=3cd1d0d79dc6e3f05b5a6c824812435438bf569a&amp;content-type=text/vnd.viewcvs-markup">v 3cd1d0d79dc6e3f05b5a6c824812435438bf569a</a><br /><br />jcabi-log 0.11</td></tr>
-<tr class="a">
-<td>2013-10-27 11:08:35</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=c9dc80c5aa77e3d3a36bbb9bc96a75ecef1d2e6e&amp;content-type=text/vnd.viewcvs-markup">v c9dc80c5aa77e3d3a36bbb9bc96a75ecef1d2e6e</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=c9dc80c5aa77e3d3a36bbb9bc96a75ecef1d2e6e&amp;content-type=text/vnd.viewcvs-markup">v c9dc80c5aa77e3d3a36bbb9bc96a75ecef1d2e6e</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=c9dc80c5aa77e3d3a36bbb9bc96a75ecef1d2e6e&amp;content-type=text/vnd.viewcvs-markup">v c9dc80c5aa77e3d3a36bbb9bc96a75ecef1d2e6e</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/resources/log4j.properties">src/test/resources/<b>log4j.properties</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/resources/log4j.properties?rev=c9dc80c5aa77e3d3a36bbb9bc96a75ecef1d2e6e&amp;content-type=text/vnd.viewcvs-markup">v c9dc80c5aa77e3d3a36bbb9bc96a75ecef1d2e6e</a><br /><br />#1 jslint added to build</td></tr>
-<tr class="b">
-<td>2013-10-27 09:00:19</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=a747c9166a703bdb8928cdd8c097c8028d5e5d20&amp;content-type=text/vnd.viewcvs-markup">v a747c9166a703bdb8928cdd8c097c8028d5e5d20</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=a747c9166a703bdb8928cdd8c097c8028d5e5d20&amp;content-type=text/vnd.viewcvs-markup">v a747c9166a703bdb8928cdd8c097c8028d5e5d20</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=a747c9166a703bdb8928cdd8c097c8028d5e5d20&amp;content-type=text/vnd.viewcvs-markup">v a747c9166a703bdb8928cdd8c097c8028d5e5d20</a><br /><br />#1 VerboseProcess</td></tr>
-<tr class="a">
-<td>2013-10-27 08:14:13</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=3353de478fbe164e5252b1ff0524939601eddc3b&amp;content-type=text/vnd.viewcvs-markup">v 3353de478fbe164e5252b1ff0524939601eddc3b</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=3353de478fbe164e5252b1ff0524939601eddc3b&amp;content-type=text/vnd.viewcvs-markup">v 3353de478fbe164e5252b1ff0524939601eddc3b</a><br /><br />#1 reproduced</td></tr>
-<tr class="b">
-<td>2013-10-25 21:28:52</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=0e597e255aba0e789832600f40c53984ca279b4d&amp;content-type=text/vnd.viewcvs-markup">v 0e597e255aba0e789832600f40c53984ca279b4d</a><br /><br />#1 reproduced</td></tr>
-<tr class="a">
-<td>2013-10-25 11:59:14</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=99a6919e37a242341c2126ab3b57994e2cb82d6a&amp;content-type=text/vnd.viewcvs-markup">v 99a6919e37a242341c2126ab3b57994e2cb82d6a</a><br /><br />0.1</td></tr>
-<tr class="b">
-<td>2013-10-25 11:58:54</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java">src/main/java/org/phandom/<b>Phandom.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/java/org/phandom/Phandom.java?rev=fd4b84e16301f7598c6554290a0c507f188a4f7b&amp;content-type=text/vnd.viewcvs-markup">v fd4b84e16301f7598c6554290a0c507f188a4f7b</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js">src/main/resources/org/phandom/<b>dom.js</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/main/resources/org/phandom/dom.js?rev=fd4b84e16301f7598c6554290a0c507f188a4f7b&amp;content-type=text/vnd.viewcvs-markup">v fd4b84e16301f7598c6554290a0c507f188a4f7b</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=fd4b84e16301f7598c6554290a0c507f188a4f7b&amp;content-type=text/vnd.viewcvs-markup">v fd4b84e16301f7598c6554290a0c507f188a4f7b</a><br /><br />javascript errors are caught</td></tr>
-<tr class="a">
-<td>2013-10-25 11:28:19</td>
-<td>Yegor Bugayenko &lt;yegor@tpc2.com&gt;</td>
-<td><a class="externalLink" href="https://github.com/yegor256/phandom/.gitignore"><b>.gitignore</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/.gitignore?rev=7f723826d19cabaa360cc33edb4efd758dedcc5b&amp;content-type=text/vnd.viewcvs-markup">v 7f723826d19cabaa360cc33edb4efd758dedcc5b</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=7f723826d19cabaa360cc33edb4efd758dedcc5b&amp;content-type=text/vnd.viewcvs-markup">v 7f723826d19cabaa360cc33edb4efd758dedcc5b</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java">src/test/java/org/phandom/<b>PhandomTest.java</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/test/java/org/phandom/PhandomTest.java?rev=7f723826d19cabaa360cc33edb4efd758dedcc5b&amp;content-type=text/vnd.viewcvs-markup">v 7f723826d19cabaa360cc33edb4efd758dedcc5b</a><br /><br />more tests to catch JS errors</td></tr></table></div></div>
-            </article>
-            <p style="margin-bottom: 3em; margin-top: 2em;">
-                Copyright &#169;
-                                                    2013
-                                Phandom, All Rights Reserved.
-                <a href="http://maven.apache.org/privacy-policy.html">Privacy Policy</a>.
-            </p>
-            <a href="http://maven.apache.org" title="site is built by Apache Maven"
-                style='position: absolute; bottom: 1em; right: 1em;'>
-                <img src='images/built-by-maven.png' style='width: 50px; height: 17px;'
-                    alt='site is built by Apache Maven'/>
-            </a>
+<td><a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml"><b>pom.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/pom.xml?rev=da2863cefc05a091563b8c96133e4edca47514c1&amp;content-type=text/vnd.viewcvs-markup">v da2863cefc05a091563b8c96133e4edca47514c1</a><br /><a class="externalLink" href="https://github.com/yegor256/phandom/src/site/site.xml">src/site/<b>site.xml</b></a> <a class="externalLink" href="https://github.com/yegor256/phandom/src/site/site.xml?rev=da2863cefc05a091563b8c96133e4edca47514c1&amp;content-type=text/vnd.viewcvs-markup">v da2863cefc05a091563b8c96133e4edca47514c1</a><br /><br />parent 0.18.1</td></tr></table></div></div>
+                        </div>
+                    </article>
+                    <img class="maven-mobile" src="./images/built-by-maven.png"
+                        alt="built by maven" style="float:right" width="80"/>
+                </div>
+                <div class="legal-notes">
+                    <div class="copyright">
+                        Copyright &#169;
+                                                                            2013-2014
+                                                <br/>
+                        Phandom, All Rights Reserved.
+                        <br/>
+                        <a href="http://maven.apache.org/privacy-policy.html">Privacy Policy</a>.
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

@@ -24,6 +24,8 @@
                                             <link rel="stylesheet" href="./css/highlight.css" />
         <script src="./js/jquery-1.8.3.min.js"></script>
         <script src="./js/highlight-7.3.min.js"></script>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+        <link href="./css/jcabi.css" rel="stylesheet"/>
         <script>
             $(document).ready(
                 function() {
@@ -32,117 +34,154 @@
                             hljs.highlightBlock(element);
                         }
                     );
+                    $(".menu-button").click(
+                        function() {
+                            if ($("#here-goes-menu").attr("class") == "menu-off") {
+                                $("#menu").clone().attr("class", "mobile-menu").appendTo("#here-goes-menu");
+                                $("#here-goes-menu").attr("class", "menu-on");
+                            } else {
+                                $(".mobile-menu").hide();
+                                $("#here-goes-menu").attr("class", "menu-off");
+                            }
+                        }
+                    );
                 }
             );
         </script>
     </head>
     <body>
+                <div class="page">
+            <div class="menu-section">
                 <ul id="menu">
-                                                    <li>
-                    Overview
-                                            <ul>
-                                                                            <li>
-                                                                    <a href="index.html" title="Introduction">Introduction</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="apidocs-0.2.1/index.html" title="JavaDoc 0.2.1">JavaDoc 0.2.1</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="cobertura/index.html" title="Test Coverage">Test Coverage</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="changes-report.html" title="Release History">Release History</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                </ul>
-                                    </li>
-                            <li>
-                    Project Documentation
-                                            <ul>
-                                                                            <li>
-                                                                    <a href="project-info.html" title="Project Information">Project Information</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <ul>
-                                                                            <li>
-                                                                    <a href="integration.html" title="Continuous Integration">Continuous Integration</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                            <strong>                        <a href="dependencies.html" title="Dependencies">Dependencies</a>
+                                                                                    <li>
+                            Overview
+                                                            <ul>
+                                                                                                    <li>
+                                                                                    <a href="index.html" title="Introduction">Introduction</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="apidocs-0.2.2/index.html" title="JavaDoc 0.2.2">JavaDoc 0.2.2</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="cobertura/index.html" title="Test Coverage">Test Coverage</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="releases" title="Release History">Release History</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                        </ul>
+                                                    </li>
+                                            <li>
+                            Project Documentation
+                                                            <ul>
+                                                                                                    <li>
+                                                                                    <a href="project-info.html" title="Project Information">Project Information</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <ul>
+                                                                                                    <li>
+                                                                                    <a href="integration.html" title="Continuous Integration">Continuous Integration</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                            <strong>                        <a href="dependencies.html" title="Dependencies">Dependencies</a>
         </strong>
-                                                                                                                <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="license.html" title="Project License">Project License</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="mail-lists.html" title="Mailing Lists">Mailing Lists</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="plugins.html" title="Project Plugins">Project Plugins</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="team-list.html" title="Project Team">Project Team</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="source-repository.html" title="Source Repository">Source Repository</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="project-summary.html" title="Project Summary">Project Summary</a>
-                                                                                                                        <ul>
-                                                    </ul>
-                                    </li>
-                                                                </ul>
-                                    </li>
-                                                                                        <li>
-                                                                    <a href="project-reports.html" title="Project Reports">Project Reports</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </li>
-                                                                </ul>
-                                    </li>
-                    </ul>
-        <div id="content">
-                            <a href="https://github.com/yegor256/phandom">
-                    <img style="position: absolute; top: 0; right: 0; border: 0; width: 100px; height: 100px;"
-                        src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"
-                        alt="Fork me on GitHub" />
-                </a>
+                                                                                                                                                                <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="license.html" title="Project License">Project License</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="mail-lists.html" title="Mailing Lists">Mailing Lists</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="plugins.html" title="Project Plugins">Project Plugins</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="team-list.html" title="Project Team">Project Team</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="source-repository.html" title="Source Repository">Source Repository</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="project-summary.html" title="Project Summary">Project Summary</a>
+                                                                                                                                                                        <ul>
+                                                                    </ul>
+                                                    </li>
+                                                                                        </ul>
+                                                    </li>
+                                                                                                                        <li>
+                                                                                    <a href="project-reports.html" title="Project Reports">Project Reports</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </li>
+                                                                                        </ul>
+                                                    </li>
+                                    </ul>
+            </div>
+            <div id="right-side">
+                <div id="content">
+                    <i class="menu-button fa fa-align-justify"></i>
+                    <div class="logo-section">
                         <a href="http://www.phandom.org/" title="${decoration.bannerLeft.title}">
-                <img src="http://img.phandom.org/logo-256x256.png"
-                    alt="phandom.org"
-                                            width="64"
-                                                                height="64"
-                                    />
-            </a>
-                        <p>
-                
-                01-Nov-2013
-                0.2.1
-            </p>
-            <article>
-                <a name="Project_Dependencies"></a>
+                            <img src="http://img.phandom.org/logo-256x256.png"
+                                alt="phandom.org"
+                                                                    width="64"
+                                                                                                    height="64"
+                                                            />
+                        </a>
+                    </div>
+                    <div class="date">
+                        <div class="date-numbers">
+                            <strong>0.2.2</strong>
+                            
+                            07-Apr-2014
+                        </div>
+                                                                            <div class="github">
+                                <iframe
+                                    class="github-large"
+                                    src="http://ghbtns.com/github-btn.html?user=yegor256&amp;repo=phandom&amp;type=watch&amp;count=true&amp;size=large"
+                                    allowtransparency="true"
+                                    frameborder="0"
+                                    scrolling="0"
+                                    width="170"
+                                    height="30">
+                                </iframe>
+                                <iframe
+                                    class="github-small"
+                                    src="http://ghbtns.com/github-btn.html?user=yegor256&amp;repo=phandom&amp;type=watch&amp;count=true&amp;size=small"
+                                    allowtransparency="true"
+                                    frameborder="0"
+                                    scrolling="0"
+                                    width="170"
+                                    height="30">
+                                </iframe>
+                            </div>
+                                            </div>
+                    <div id="here-goes-menu" class="menu-off"></div>
+                    <article>
+                        <div class="section">
+                            <a name="Project_Dependencies"></a>
 <div class="section">
 <h2>Project Dependencies<a name="Project_Dependencies"></a></h2><a name="Project_Dependencies_compile"></a>
 <div class="section">
@@ -157,14 +196,14 @@
 <th>License</th></tr>
 <tr class="b">
 <td>com.jcabi</td>
-<td><a class="externalLink" href="http://www.jcabi.com/parent/jcabi-aspects">jcabi-aspects</a></td>
-<td>0.12</td>
+<td><a class="externalLink" href="http://www.jcabi.com/jcabi-aspects">jcabi-aspects</a></td>
+<td>0.14</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.jcabi.com/LICENSE.txt">BSD</a></td></tr>
 <tr class="a">
 <td>com.jcabi</td>
-<td><a class="externalLink" href="http://www.jcabi.com/parent/jcabi-log">jcabi-log</a></td>
-<td>0.12</td>
+<td><a class="externalLink" href="http://www.jcabi.com/jcabi-log">jcabi-log</a></td>
+<td>0.12.2</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.jcabi.com/LICENSE.txt">BSD</a></td></tr>
 <tr class="b">
@@ -181,8 +220,8 @@
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
 <tr class="b">
 <td>org.apache.commons</td>
-<td><a class="externalLink" href="http://commons.apache.org/lang/">commons-lang3</a></td>
-<td>3.1</td>
+<td><a class="externalLink" href="http://commons.apache.org/proper/commons-lang/">commons-lang3</a></td>
+<td>3.3</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr></table></div><a name="Project_Dependencies_test"></a>
 <div class="section">
@@ -234,7 +273,7 @@
 <tr class="b">
 <td>org.slf4j</td>
 <td><a class="externalLink" href="http://www.slf4j.org">slf4j-log4j12</a></td>
-<td>1.7.5</td>
+<td>1.7.6</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></td></tr></table></div><a name="Project_Dependencies_provided"></a>
 <div class="section">
@@ -250,19 +289,19 @@
 <tr class="b">
 <td>org.aspectj</td>
 <td><a class="externalLink" href="http://www.aspectj.org">aspectjrt</a></td>
-<td>1.7.3</td>
+<td>1.7.4</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a></td></tr>
 <tr class="a">
 <td>org.hibernate</td>
 <td><a class="externalLink" href="http://validator.hibernate.org/hibernate-validator">hibernate-validator</a></td>
-<td>5.1.0.Alpha1</td>
+<td>5.1.0.Final</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr>
 <tr class="b">
 <td>org.projectlombok</td>
 <td><a class="externalLink" href="http://projectlombok.org">lombok</a></td>
-<td>1.12.2</td>
+<td>1.12.6</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://projectlombok.org/LICENSE">The MIT License</a></td></tr>
 <tr class="a">
@@ -310,8 +349,8 @@
 <td><a class="externalLink" href="http://www.jcabi.com/LICENSE.txt">BSD</a></td></tr>
 <tr class="a">
 <td>com.jcabi</td>
-<td><a class="externalLink" href="http://www.jcabi.com/parent/jcabi-xml">jcabi-xml</a></td>
-<td>0.2</td>
+<td><a class="externalLink" href="http://www.jcabi.com/jcabi-xml">jcabi-xml</a></td>
+<td>0.7.8</td>
 <td>-</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.jcabi.com/LICENSE.txt">BSD</a></td></tr>
@@ -339,7 +378,7 @@
 <tr class="a">
 <td>commons-codec</td>
 <td><a class="externalLink" href="http://commons.apache.org/proper/commons-codec/">commons-codec</a></td>
-<td>1.8</td>
+<td>1.9</td>
 <td>-</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
@@ -391,7 +430,7 @@
 <tr class="b">
 <td>com.fasterxml</td>
 <td><a class="externalLink" href="http://github.com/cowtowncoder/java-classmate">classmate</a></td>
-<td>0.8.0</td>
+<td>1.0.0</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
 <tr class="a">
@@ -422,7 +461,7 @@
 <div class="section">
 <h3>Dependency Tree<a name="Dependency_Tree"></a></h3>
 <ul>
-<li>com.jcabi.incubator:phandom:jar:0.2.1 <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<li>com.jcabi.incubator:phandom:jar:0.2.2 <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>phandom</th></tr>
@@ -432,7 +471,7 @@
 <p><b>URL: </b><a class="externalLink" href="https://github.com/yegor256/phandom">https://github.com/yegor256/phandom</a></p>
 <p><b>Project License: </b><a class="externalLink" href="https://www.phandom.org/LICENSE.txt">BSD</a></p></td></tr></table></div>
 <ul>
-<li>org.projectlombok:lombok:jar:1.12.2 (provided) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
+<li>org.projectlombok:lombok:jar:1.12.6 (provided) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Project Lombok</th></tr>
@@ -457,23 +496,23 @@
     JAXP it's Sun.</p>
 <p><b>URL: </b><a class="externalLink" href="http://xml.apache.org/commons/components/external/">http://xml.apache.org/commons/components/external/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>com.jcabi:jcabi-aspects:jar:0.12 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
+<li>com.jcabi:jcabi-aspects:jar:0.14 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>jcabi-aspects</th></tr>
 <tr class="b">
 <td>
 <p><b>Description: </b>Collection of convenient and useful Java annotations</p>
-<p><b>URL: </b><a class="externalLink" href="http://www.jcabi.com/parent/jcabi-aspects">http://www.jcabi.com/parent/jcabi-aspects</a></p>
+<p><b>URL: </b><a class="externalLink" href="http://www.jcabi.com/jcabi-aspects">http://www.jcabi.com/jcabi-aspects</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.jcabi.com/LICENSE.txt">BSD</a></p></td></tr></table></div></li>
-<li>com.jcabi:jcabi-log:jar:0.12 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
+<li>com.jcabi:jcabi-log:jar:0.12.2 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>jcabi-log</th></tr>
 <tr class="b">
 <td>
 <p><b>Description: </b>Wrapper of SLF4J and a few supplementary logging classes</p>
-<p><b>URL: </b><a class="externalLink" href="http://www.jcabi.com/parent/jcabi-log">http://www.jcabi.com/parent/jcabi-log</a></p>
+<p><b>URL: </b><a class="externalLink" href="http://www.jcabi.com/jcabi-log">http://www.jcabi.com/jcabi-log</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.jcabi.com/LICENSE.txt">BSD</a></p></td></tr></table></div>
 <ul>
 <li>org.slf4j:slf4j-api:jar:1.7.5 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
@@ -495,16 +534,16 @@
 file comparators, endian transformation classes, and much more.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/io/">http://commons.apache.org/io/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>org.apache.commons:commons-lang3:jar:3.1 (compile) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
+<li>org.apache.commons:commons-lang3:jar:3.3 (compile) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
-<th>Commons Lang</th></tr>
+<th>Apache Commons Lang</th></tr>
 <tr class="b">
 <td>
-<p><b>Description: </b>Commons Lang, a package of Java utility classes for the
+<p><b>Description: </b>Apache Commons Lang, a package of Java utility classes for the
   classes that are in java.lang's hierarchy, or are considered to be so
   standard as to justify existence in java.lang.</p>
-<p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/lang/">http://commons.apache.org/lang/</a></p>
+<p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-lang/">http://commons.apache.org/proper/commons-lang/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
 <li>com.rexsl:rexsl-test:jar:0.6 (test) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
 <table border="0" class="bodyTable">
@@ -516,14 +555,14 @@ file comparators, endian transformation classes, and much more.</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.rexsl.com/rexsl-test">http://www.rexsl.com/rexsl-test</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.rexsl.com/LICENSE.txt">BSD</a></p></td></tr></table></div>
 <ul>
-<li>com.jcabi:jcabi-xml:jar:0.2 (test) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
+<li>com.jcabi:jcabi-xml:jar:0.7.8 (test) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>jcabi-xml</th></tr>
 <tr class="b">
 <td>
 <p><b>Description: </b>XML Parsing and Transforming</p>
-<p><b>URL: </b><a class="externalLink" href="http://www.jcabi.com/parent/jcabi-xml">http://www.jcabi.com/parent/jcabi-xml</a></p>
+<p><b>URL: </b><a class="externalLink" href="http://www.jcabi.com/jcabi-xml">http://www.jcabi.com/jcabi-xml</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.jcabi.com/LICENSE.txt">BSD</a></p></td></tr></table></div>
 <ul>
 <li>net.sourceforge.reb4j:net.sourceforge.reb4j:jar:2.1.0 (test) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
@@ -591,13 +630,13 @@ file comparators, endian transformation classes, and much more.</p>
         More details you can find at www.jcabi.com.</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.jcabi.com/jcabi-manifests">http://www.jcabi.com/jcabi-manifests</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.jcabi.com/LICENSE.txt">BSD</a></p></td></tr></table></div></li>
-<li>commons-codec:commons-codec:jar:1.8 (test) <img id="_img33" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep32', '_img33' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep32" style="display:none">
+<li>commons-codec:commons-codec:jar:1.9 (test) <img id="_img33" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep32', '_img33' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep32" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
-<th>Commons Codec</th></tr>
+<th>Apache Commons Codec</th></tr>
 <tr class="b">
 <td>
-<p><b>Description: </b>The codec package contains simple encoder and decoders for
+<p><b>Description: </b>The Apache Commons Codec package contains simple encoder and decoders for
      various formats such as Base64 and Hexadecimal.  In addition to these
      widely used encoders and decoders, the codec package also maintains a
      collection of phonetic encoding utilities.</p>
@@ -621,7 +660,7 @@ file comparators, endian transformation classes, and much more.</p>
 <p><b>Description: </b>Saxon a complete and conformant implementation of the XSLT 2.0, XQuery 1.0, and XPath 2.0 Recommendations published on 23 January 2007 by W3C</p>
 <p><b>URL: </b><a class="externalLink" href="http://saxon.sourceforge.net/">http://saxon.sourceforge.net/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.mozilla.org/MPL/MPL-1.0.txt">Mozilla Public License Version 1.0</a></p></td></tr></table></div></li></ul></li>
-<li>org.aspectj:aspectjrt:jar:1.7.3 (provided) <img id="_img39" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep38', '_img39' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep38" style="display:none">
+<li>org.aspectj:aspectjrt:jar:1.7.4 (provided) <img id="_img39" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep38', '_img39' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep38" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>AspectJ runtime</th></tr>
@@ -639,7 +678,7 @@ file comparators, endian transformation classes, and much more.</p>
 <p><b>Description: </b>Bean Validation API</p>
 <p><b>URL: </b><a class="externalLink" href="http://beanvalidation.org">http://beanvalidation.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>org.hibernate:hibernate-validator:jar:5.1.0.Alpha1 (provided) <img id="_img43" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep42', '_img43' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep42" style="display:none">
+<li>org.hibernate:hibernate-validator:jar:5.1.0.Final (provided) <img id="_img43" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep42', '_img43' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep42" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Hibernate Validator Engine</th></tr>
@@ -658,7 +697,7 @@ file comparators, endian transformation classes, and much more.</p>
 <p><b>Description: </b>The JBoss Logging Framework</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.jboss.org">http://www.jboss.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, version 2.0</a></p></td></tr></table></div></li>
-<li>com.fasterxml:classmate:jar:0.8.0 (provided) <img id="_img47" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep46', '_img47' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep46" style="display:none">
+<li>com.fasterxml:classmate:jar:1.0.0 (provided) <img id="_img47" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep46', '_img47' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep46" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>ClassMate</th></tr>
@@ -715,7 +754,7 @@ file comparators, endian transformation classes, and much more.</p>
 <p><b>Description: </b>A library for instantiating Java objects</p>
 <p><b>URL: </b><a class="externalLink" href="http://objenesis.googlecode.com/svn/docs/index.html">http://objenesis.googlecode.com/svn/docs/index.html</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://objenesis.googlecode.com/svn/docs/license.html">MIT License</a></p></td></tr></table></div></li></ul></li>
-<li>org.slf4j:slf4j-log4j12:jar:1.7.5 (test) <img id="_img59" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep58', '_img59' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep58" style="display:none">
+<li>org.slf4j:slf4j-log4j12:jar:1.7.6 (test) <img id="_img59" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep58', '_img59' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep58" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>SLF4J LOG4J-12 Binding</th></tr>
@@ -743,24 +782,28 @@ file comparators, endian transformation classes, and much more.</p>
 <p><b>Mozilla Public License Version 1.0: </b>SaxonB</p>
 <p><b>Eclipse Public License - v 1.0: </b>AspectJ runtime</p>
 <p><b>Apache License, Version 2.0: </b>Hibernate Validator Engine</p>
-<p><b>The Apache Software License, Version 2.0: </b>Apache Log4j, Bean Validation API, ClassMate, Commons Codec, Commons IO, Commons Lang, XML Commons External Components XML APIs</p>
+<p><b>The Apache Software License, Version 2.0: </b>Apache Commons Codec, Apache Commons Lang, Apache Log4j, Bean Validation API, ClassMate, Commons IO, XML Commons External Components XML APIs</p>
 <p><b>CDDL 1.1: </b>JAXB Reference Implementation, jersey-client, jersey-core</p>
 <p><b>GPL2 w/ CPE: </b>JAXB Reference Implementation, jersey-client, jersey-core</p>
 <p><b>Common Public License Version 1.0: </b>JUnit</p>
 <p><b>MIT License: </b>Objenesis, SLF4J API Module, SLF4J LOG4J-12 Binding</p>
 <p><b>The MIT License: </b>Mockito, Project Lombok</p></div>
-            </article>
-            <p style="margin-bottom: 3em; margin-top: 2em;">
-                Copyright &#169;
-                                                    2013
-                                Phandom, All Rights Reserved.
-                <a href="http://maven.apache.org/privacy-policy.html">Privacy Policy</a>.
-            </p>
-            <a href="http://maven.apache.org" title="site is built by Apache Maven"
-                style='position: absolute; bottom: 1em; right: 1em;'>
-                <img src='images/built-by-maven.png' style='width: 50px; height: 17px;'
-                    alt='site is built by Apache Maven'/>
-            </a>
+                        </div>
+                    </article>
+                    <img class="maven-mobile" src="./images/built-by-maven.png"
+                        alt="built by maven" style="float:right" width="80"/>
+                </div>
+                <div class="legal-notes">
+                    <div class="copyright">
+                        Copyright &#169;
+                                                                            2013-2014
+                                                <br/>
+                        Phandom, All Rights Reserved.
+                        <br/>
+                        <a href="http://maven.apache.org/privacy-policy.html">Privacy Policy</a>.
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
