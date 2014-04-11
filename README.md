@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/yegor256/phandom.svg?branch=master)](https://travis-ci.org/yegor256/phandom)
+
 # PhantomJS Java DOM Builder
 
 **Phandom** is a Java DOM builder that uses PhantomJS. For example,
