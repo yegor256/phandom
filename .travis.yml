@@ -1,2 +1,4 @@
 language: java
+install:
+  - sudo apt-get install phandomjs
 script: mvn clean install -Pqulice
