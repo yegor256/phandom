@@ -129,16 +129,17 @@ public final class PhandomTest {
                         "function onLoad() {",
                         "for (i=0; i<1000; ++i) {",
                         "var div = document.createElement('div');",
-                        "div.innerHTML = '&lt;&#10;<b>&gt;</b>&#10;&amp;';",
+                        "div.innerHTML = i + '&lt;&#10;<b>&gt;</b>&#10;&amp;';",
                         "div.style.color = 'red';",
                         "div.setAttribute('class', 'foo');",
                         "document.body.appendChild(div);",
+                        "document.body.removeChild(div);",
                         "}}\n//]]></script></head>",
                         "<body onload='onLoad();'></body></html>\n\n"
                     )
                 ).dom()
             ),
-            XhtmlMatchers.hasXPath("/html/body[count(div)=1000]")
+            XhtmlMatchers.hasXPath("/html/body[count(div)=0]")
         );
     }
 
