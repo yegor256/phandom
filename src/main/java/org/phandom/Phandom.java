@@ -33,12 +33,8 @@ import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
 import com.jcabi.log.Logger;
 import com.jcabi.log.VerboseProcess;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import javax.validation.constraints.NotNull;
@@ -46,8 +42,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.apache.commons.io.Charsets;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.w3c.dom.Document;
@@ -105,16 +99,16 @@ public final class Phandom {
         Pattern.compile("\\d+\\.\\d+\\.\\d+");
 
     /**
-     * Content of the page to render.
+     * The page to render.
      */
-    private final transient String page;
+    private final transient Page page;
 
     /**
      * Public ctor.
      * @param content Content to encapsulate
      */
     public Phandom(@NotNull final String content) {
-        this.page = content;
+        this.page = new Page.Text(content);
     }
 
     /**
@@ -167,13 +161,8 @@ public final class Phandom {
         try {
             return new ProcessBuilder(
                 Phandom.BIN,
-                Phandom.temp(src, ".js").getAbsolutePath(),
-                Phandom.temp(
-                    new ByteArrayInputStream(
-                        this.page.getBytes(Charsets.UTF_8)
-                    ),
-                    ".html"
-                ).getAbsolutePath()
+                new Temp(src, ".js").file().getAbsolutePath(),
+                this.page.uri().toString()
             );
         } finally {
             src.close();
@@ -210,26 +199,6 @@ public final class Phandom {
             );
             throw new IOException("internal SAX error of phandom", ex);
         }
-    }
-
-    /**
-     * Make temporary file.
-     * @param content Content to save there
-     * @param ext Extension
-     * @return File name
-     * @throws IOException If fails
-     */
-    private static File temp(final InputStream content, final String ext)
-        throws IOException {
-        final File file = File.createTempFile("phandom-", ext);
-        FileUtils.forceDeleteOnExit(file);
-        final OutputStream output = new FileOutputStream(file);
-        try {
-            IOUtils.copy(content, output);
-        } finally {
-            output.close();
-        }
-        return file;
     }
 
 }
