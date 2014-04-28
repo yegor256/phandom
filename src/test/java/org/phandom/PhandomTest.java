@@ -30,12 +30,17 @@
 package org.phandom;
 
 import com.rexsl.test.XhtmlMatchers;
+import java.io.File;
+import java.net.URI;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 /**
  * Test case for {@link Phandom}.
@@ -43,6 +48,13 @@ import org.junit.Test;
  * @version $Id$
  */
 public final class PhandomTest {
+
+    /**
+     * Temporary folder.
+     * @checkstyle VisibilityModifier (3 lines)
+     */
+    @Rule
+    public transient TemporaryFolder temp = new TemporaryFolder();
 
     /**
      * Check for Phantomjs availability.
@@ -126,6 +138,38 @@ public final class PhandomTest {
                 ).dom()
             ),
             XhtmlMatchers.hasXPath("/html/body[count(div)=1000]")
+        );
+    }
+
+    /**
+     * Phandom can parse a web page.
+     * @throws Exception If some problem inside
+     * @since 0.3
+     */
+    @Test
+    public void parsesWebPage() throws Exception {
+        MatcherAssert.assertThat(
+            XhtmlMatchers.xhtml(
+                new Phandom(new URI("http://www.xembly.org/")).dom()
+            ),
+            XhtmlMatchers.hasXPath("//body")
+        );
+    }
+
+    /**
+     * Phandom can parse a file on disc.
+     * @throws Exception If some problem inside
+     * @since 0.3
+     */
+    @Test
+    public void parsesFile() throws Exception {
+        final File file = this.temp.newFile("a.html");
+        FileUtils.write(file, "<html><p>hi!</p></html>");
+        MatcherAssert.assertThat(
+            XhtmlMatchers.xhtml(
+                new Phandom(file).dom()
+            ),
+            XhtmlMatchers.hasXPath("//body[p='hi!']")
         );
     }
 

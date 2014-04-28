@@ -33,8 +33,11 @@ import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
 import com.jcabi.log.Logger;
 import com.jcabi.log.VerboseProcess;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import javax.validation.constraints.NotNull;
@@ -108,7 +111,7 @@ public final class Phandom {
      * @param content Content to encapsulate
      */
     public Phandom(@NotNull final String content) {
-        this.page = new Page.Text(content);
+        this(new Page.Text(content));
     }
 
     /**
@@ -118,6 +121,45 @@ public final class Phandom {
      */
     public Phandom(@NotNull final InputStream stream) throws IOException {
         this(IOUtils.toString(stream, CharEncoding.UTF_8));
+    }
+
+    /**
+     * Public ctor.
+     * @param uri URI to render
+     * @throws IOException If fails to read the stream
+     * @since 0.3
+     */
+    public Phandom(@NotNull final URI uri) throws IOException {
+        this(new Page.Web(uri));
+    }
+
+    /**
+     * Public ctor.
+     * @param url URL to render
+     * @throws IOException If fails to read the stream
+     * @since 0.3
+     */
+    public Phandom(@NotNull final URL url) throws IOException {
+        this(URI.create(url.toString()));
+    }
+
+    /**
+     * Public ctor.
+     * @param file File to render
+     * @throws IOException If fails to read the stream
+     * @since 0.3
+     */
+    public Phandom(@NotNull final File file) throws IOException {
+        this(file.toURI());
+    }
+
+    /**
+     * Public ctor.
+     * @param src Page with sources
+     * @since 0.3
+     */
+    private Phandom(final Page src) {
+        this.page = src;
     }
 
     /**

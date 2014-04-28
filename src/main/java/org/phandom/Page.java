@@ -85,4 +85,29 @@ interface Page {
         }
     }
 
+    /**
+     * Web page.
+     */
+    @Immutable
+    @ToString
+    @EqualsAndHashCode(of = "href")
+    @Loggable(Loggable.DEBUG)
+    final class Web implements Page {
+        /**
+         * HREF.
+         */
+        private final transient String href;
+        /**
+         * Public ctor.
+         * @param uri URI
+         */
+        public Web(final URI uri) {
+            this.href = uri.toString();
+        }
+        @Override
+        public URI uri() {
+            return URI.create(this.href);
+        }
+    }
+
 }
