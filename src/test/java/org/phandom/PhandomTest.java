@@ -38,6 +38,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -170,6 +171,40 @@ public final class PhandomTest {
                 new Phandom(file).dom()
             ),
             XhtmlMatchers.hasXPath("//body[p='hi!']")
+        );
+    }
+
+    /**
+     * Phandom can parse XML+XSL.
+     * @throws Exception If some problem inside
+     * @since 0.3
+     * @see http://stackoverflow.com/questions/23342952/does-phantomjs-render-xmlxsl
+     */
+    @Test
+    @Ignore
+    public void parsesXmlAndXsl() throws Exception {
+        final File dir = this.temp.newFolder();
+        final File main = new File(dir, "main.xml");
+        FileUtils.write(
+            main,
+            "<?xml-stylesheet href='i.xsl' type='text/xsl'?><index/>"
+        );
+        FileUtils.write(
+            new File(dir, "i.xsl"),
+            StringUtils.join(
+                "<xsl:stylesheet",
+                " xmlns:xsl='http://www.w3.org/1999/XSL/Transform'",
+                " xmlns='http://www.w3.org/1999/xhtml' version='1.0'>",
+                "<xsl:template match='/'>",
+                "<html>hello, XML!</html>",
+                "</xsl:template>"
+            )
+        );
+        MatcherAssert.assertThat(
+            XhtmlMatchers.xhtml(
+                new Phandom(main).dom()
+            ),
+            XhtmlMatchers.hasXPath("//head and //body")
         );
     }
 
