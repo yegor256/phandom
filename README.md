@@ -1,3 +1,5 @@
+[![Made By Teamed.io](http://img.teamed.io/btn.svg)](http://www.teamed.io)
+
 [![Build Status](https://travis-ci.org/yegor256/phandom.svg?branch=master)](https://travis-ci.org/yegor256/phandom)
 
 # PhantomJS Java DOM Builder
