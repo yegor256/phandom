@@ -1,4 +1,5 @@
 [![Made By Teamed.io](http://img.teamed.io/btn.svg)](http://www.teamed.io)
+[![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/phandom)](http://www.rultor.com/p/yegor256/phandom)
 
 [![Build Status](https://travis-ci.org/yegor256/phandom.svg?branch=master)](https://travis-ci.org/yegor256/phandom)
 
