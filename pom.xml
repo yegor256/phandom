@@ -33,7 +33,7 @@
     <parent>
         <groupId>com.jcabi</groupId>
         <artifactId>parent</artifactId>
-        <version>0.18.1</version>
+        <version>0.27.1</version>
     </parent>
     <groupId>com.jcabi.incubator</groupId>
     <artifactId>phandom</artifactId>
@@ -78,8 +78,8 @@
         <url>https://github.com/yegor256/phandom</url>
     </scm>
     <ciManagement>
-        <system>rultor</system>
-        <url>http://www.rultor.com/s/phandom</url>
+        <system>travis</system>
+        <url>https://travis-ci.org/yegor256/phandom</url>
     </ciManagement>
     <distributionManagement>
         <site>
