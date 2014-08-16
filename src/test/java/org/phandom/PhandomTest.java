@@ -76,15 +76,15 @@ public final class PhandomTest {
                 new Phandom(
                     StringUtils.join(
                         "<!DOCTYPE html>\n",
-                        "<html><head>\n",
+                        "<html xmlns='http://www.w3.org/1999/xhtml'><head>\n",
                         "<meta content='hi there' name='description'/>\n",
                         "</head><body><p>&euro;</p><a href='#'/></body></html>"
                     )
                 ).dom()
             ),
             XhtmlMatchers.hasXPaths(
-                "/html/body",
-                "/html/head/meta[@name='description']",
+                "/xhtml:html/body",
+                "/xhtml:html/head/meta[@name='description']",
                 "//p[.='\u20ac']"
             )
         );
@@ -98,9 +98,13 @@ public final class PhandomTest {
     public void succeedsOnBrokenDom() throws Exception {
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
-                new Phandom(IOUtils.toInputStream("<html>\nbroken")).dom()
+                new Phandom(
+                    IOUtils.toInputStream(
+                        "<html xmlns='http://www.w3.org/1999/xhtml'>\nbroken"
+                    )
+                ).dom()
             ),
-            XhtmlMatchers.hasXPath("/html[head and body]")
+            XhtmlMatchers.hasXPath("/xhtml:html[head and body]")
         );
     }
 
@@ -111,7 +115,10 @@ public final class PhandomTest {
     @Test(expected = RuntimeException.class)
     public void failsOnBrokenJavascript() throws Exception {
         new Phandom(
-            "<html><body><script>a.call();</script>\n</body></html>"
+            StringUtils.join(
+                "<html xmlns='http://www.w3.org/1999/xhtml'  >",
+                "<body><script>a.call();</script>\n</body></html>"
+            )
         ).dom();
     }
 
@@ -125,7 +132,8 @@ public final class PhandomTest {
             XhtmlMatchers.xhtml(
                 new Phandom(
                     StringUtils.join(
-                        "<html><head><script>//<![CDATA[\n",
+                        "<html xmlns='http://www.w3.org/1999/xhtml'>",
+                        "<head><script>//<![CDATA[\n",
                         "function onLoad() {",
                         "for (i=0; i<1000; ++i) {",
                         "var div = document.createElement('div');",
@@ -139,7 +147,7 @@ public final class PhandomTest {
                     )
                 ).dom()
             ),
-            XhtmlMatchers.hasXPath("/html/body[count(div)=0]")
+            XhtmlMatchers.hasXPath("/xhtml:html/body[count(div)=0]")
         );
     }
 
@@ -166,7 +174,10 @@ public final class PhandomTest {
     @Test
     public void parsesFile() throws Exception {
         final File file = this.temp.newFile("a.html");
-        FileUtils.write(file, "<html><p>hi!</p></html>");
+        FileUtils.write(
+            file,
+            "<html xmlns='http://www.w3.org/1999/xhtml'><p>hi!</p></html>"
+        );
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
                 new Phandom(file).dom()
