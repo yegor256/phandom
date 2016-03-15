@@ -36,6 +36,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -161,8 +162,8 @@ public final class PhandomTest {
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
                 new Phandom(new URI("http://www.xembly.org/")).dom()
-            ),
-            XhtmlMatchers.hasXPath("//body")
+            ).toString(),
+            Matchers.containsString("<html>")
         );
     }
 
